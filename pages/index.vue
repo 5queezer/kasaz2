@@ -6,9 +6,10 @@
       </b-col>
     </b-row>
     <b-row class="mb-3">
-      <b-col>
+      <b-col id="listview" cols="6">
         <h1>{{ data.length }}</h1>
       </b-col>
+      <b-col id="mapsview" cols="6" />
     </b-row>
   </b-container>
 </template>
