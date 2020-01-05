@@ -2,20 +2,16 @@ import apartmentFixture from './fixtures/apartment.json'
 import { mutations, state } from '@/store/index'
 
 describe('Mutations', () => {
-  const add = (apartment) => { mutations.add(state, apartment) }
-  const reset = () => { mutations.reset(state) }
-  const set = (data) => { mutations.set(state, data) }
-  const activate = (id) => { mutations.activate(state, id) }
   let fixture
 
   beforeEach(() => {
-    reset()
+    mutations.reset(state)
     fixture = JSON.parse(JSON.stringify(apartmentFixture))
   })
 
   it('adds a new apartment', () => {
     // act
-    add(fixture)
+    mutations.add(state, fixture)
 
     // assert
     expect(state.data.length).toBe(1)
@@ -31,7 +27,7 @@ describe('Mutations', () => {
     }
 
     // act
-    set(data)
+    mutations.save(state, data)
 
     // assert
     expect(state.data.length).toBe(max)
@@ -41,8 +37,8 @@ describe('Mutations', () => {
     const id = fixture.id
 
     // act
-    set([fixture])
-    activate(id)
+    mutations.save(state, [fixture])
+    mutations.activate(state, id)
 
     // assert
     expect(state.index).toBe(0)
@@ -50,7 +46,7 @@ describe('Mutations', () => {
 
   it('throws error with entry of same id', () => {
     fixture.id = 0
-    const call = () => add(fixture)
+    const call = () => mutations.add(state, fixture)
 
     // first call
     expect(call).not.toThrowError()

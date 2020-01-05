@@ -31,7 +31,7 @@ export const mutations = {
     state.data = []
     state.index = undefined
   },
-  set (state, data) {
+  save (state, data) {
     state.data = data
   },
   loading (state, value) {
@@ -53,7 +53,7 @@ export const actions = {
       }
     })
       .then((result) => {
-        commit('set', result)
+        commit('save', result)
         commit('loading', false)
         return result.length > 0
       })

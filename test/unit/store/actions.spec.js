@@ -13,6 +13,6 @@ describe('store actions', () => {
     const resp = [{ id: 0 }, { id: 1 }]
     api.getApartments.mockResolvedValue(resp)
     await actions.fetch({ commit })
-    expect(commit).toBeCalledWith('set', resp)
+    expect(commit).toBeCalledWith('save', resp)
   })
 })
