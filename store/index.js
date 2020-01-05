@@ -24,6 +24,12 @@ export const getters = {
     const start = (getters.page % state.perPage) - 1
     const end = start + state.perPage
     return getters.data.slice(start, end)
+  },
+  count (state) {
+    return state.data.length
+  },
+  getIndex (state) {
+    return state.index
   }
 }
 
@@ -55,19 +61,24 @@ export const mutations = {
   activate (state, id) {
     state.index = state.data.findIndex(item => item.id === id)
   },
+  setPage (state, page) {
+    const startIndex = (page * state.perPage) - state.perPage
+    const offset = state.index % 10
+    state.index = startIndex + offset
+  },
   next (state) {
     const index = state.index + state.perPage
     const max = state.data.length - 1
     state.index = index > max ? max : index
   },
-  prev (stae) {
+  prev (state) {
     const index = state.index - state.perPage
     state.index = index < 0 ? 0 : index
   },
-  begin (stae) {
+  begin (state) {
     state.index = state.data.length > 0 ? 0 : undefined
   },
-  end (stae) {
+  end (state) {
     const max = state.data.length - 1
     state.index = max
   }
