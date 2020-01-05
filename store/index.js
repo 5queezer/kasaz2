@@ -9,6 +9,9 @@ export const state = () => ({
 export const getters = {
   data (state) {
     return state.data
+  },
+  loading (state) {
+    return state.loading
   }
 }
 
