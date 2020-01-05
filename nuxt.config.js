@@ -43,6 +43,10 @@ export default {
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    // Fontawesome Icon Font
+    '@nuxtjs/font-awesome',
+    // dotenv
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Axios module configuration
@@ -58,6 +62,12 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
     }
+  },
+  env: {
+    VUE_APP_GOOGLE_MAPS_API_KEY: process.env.VUE_APP_GOOGLE_MAPS_API_KEY
   }
 }
