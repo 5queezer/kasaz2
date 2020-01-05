@@ -17,9 +17,11 @@
       <b-spinner type="grow" label="Loading..." />
     </b-row>
     <b-row v-else class="mb-3">
-      <b-col id="listview" cols="6" />
+      <b-col id="listview" cols="6">
+        <list :data="data" />
+      </b-col>
       <b-col id="mapsview" cols="6">
-        <maps :locations="[]" />
+        <maps :locations="[]" :data="data" />
       </b-col>
     </b-row>
   </b-container>
@@ -30,6 +32,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import Logo from '~/components/Logo.vue'
 import Navbar from '~/components/Navbar.vue'
 import Maps from '~/components/Maps.vue'
+import List from '~/components/List.vue'
 
 export default {
   filters: {
@@ -46,7 +49,8 @@ export default {
   components: {
     Logo,
     Navbar,
-    Maps
+    Maps,
+    List
   },
   data () {
     return {
