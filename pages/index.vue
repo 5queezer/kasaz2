@@ -1,9 +1,10 @@
 <template>
   <b-container id="main" fluid class="d-flex flex-column">
-    <b-row class="mb-3">
+    <b-row class="mb-3 pt-5">
       <b-col>
         <logo />
       </b-col>
+      <b-col v-if="debug" />
     </b-row>
     <b-row>
       <b-col>
@@ -31,7 +32,10 @@ export default {
     Navbar
   },
   computed: {
-    ...mapGetters(['data', 'loading'])
+    ...mapGetters(['data', 'loading']),
+    debug () {
+      return process.env.NODE_ENV === 'development'
+    }
   },
   async mounted () {
     await this.fetch()
