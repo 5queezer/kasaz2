@@ -10,12 +10,12 @@
         <navbar />
       </b-col>
     </b-row>
-    <b-row v-if="!loading" class="mb-3">
+    <b-row v-if="loading" class="loading">
+      <b-spinner type="grow" label="Loading..." />
+    </b-row>
+    <b-row v-else class="mb-3">
       <b-col id="listview" cols="6" />
       <b-col id="mapsview" cols="6" />
-    </b-row>
-    <b-row v-else class="loading">
-      <b-spinner type="grow" label="Loading..." />
     </b-row>
   </b-container>
 </template>
