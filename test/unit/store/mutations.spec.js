@@ -19,7 +19,7 @@ describe('Mutations', () => {
   })
 
   it('can assign an array', () => {
-    const max = 10
+    const max = 100
     const data = []
     for (let i = 0; i < max; i++) {
       fixture.id = i

@@ -3,7 +3,8 @@ import api from './api'
 export const state = () => ({
   data: [],
   loading: false,
-  index: undefined
+  index: undefined,
+  perPage: 10
 })
 
 export const getters = {
@@ -12,6 +13,17 @@ export const getters = {
   },
   loading (state) {
     return state.loading
+  },
+  page (state) {
+    return state.index ? parseInt(state.index / state.perPage) + 1 : 1
+  },
+  perPage (state) {
+    return state.perPage
+  },
+  paginated (state, getters) {
+    const start = (getters.page % state.perPage) - 1
+    const end = start + state.perPage
+    return getters.data.slice(start, end)
   }
 }
 
