@@ -16,7 +16,9 @@
     </b-row>
     <b-row v-else class="mb-3">
       <b-col id="listview" cols="6" />
-      <b-col id="mapsview" cols="6" />
+      <b-col id="mapsview" cols="6">
+        <maps />
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -25,11 +27,13 @@
 import { mapActions, mapGetters } from 'vuex'
 import Logo from '~/components/Logo.vue'
 import Navbar from '~/components/Navbar.vue'
+import Maps from '~/components/Maps.vue'
 
 export default {
   components: {
     Logo,
-    Navbar
+    Navbar,
+    Maps
   },
   computed: {
     ...mapGetters(['data', 'loading']),
