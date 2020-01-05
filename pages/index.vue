@@ -12,6 +12,7 @@
       <b-col>
         <h1>{{ data.length }}</h1>
       </b-col>
+      <b-col id="mapsview" cols="6" />
     </b-row>
     <b-row v-else>
       <b-col>
