@@ -13,9 +13,8 @@ describe('store actions', () => {
   })
 
   it('can fetch', async () => {
-    const response = [{ ...fixture, id: 0 }]
-    api.getApartments.mockResolvedValue(response)
+    api.getApartments.mockResolvedValue([fixture])
     await actions.fetch({ commit })
-    expect(commit).toBeCalledWith('save', response)
+    expect(commit).toBeCalledWith('save', [fixture])
   })
 })

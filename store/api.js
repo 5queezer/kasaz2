@@ -10,12 +10,7 @@ const api = setup({
 function getApartments (params) {
   return api.get('/response.json', { params })
     .then((response) => {
-      const simulatedData = {
-        data: {
-          markers: response
-        }
-      }
-      return simulatedData.data.markers
+      return response.data.markers
     })
 }
 
