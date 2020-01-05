@@ -19,7 +19,7 @@
     <b-row v-else class="mb-3">
       <b-col id="listview" cols="6" />
       <b-col id="mapsview" cols="6">
-        <maps :locations="[]" />
+        <maps :locations="locations" />
       </b-col>
     </b-row>
   </b-container>
@@ -68,7 +68,7 @@ export default {
         }
       })
     },
-    ...mapGetters(['data', 'loading', 'page', 'paginated'])
+    ...mapGetters(['data', 'loading'])
   },
   async mounted () {
     await this.fetch()

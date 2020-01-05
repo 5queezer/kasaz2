@@ -54,7 +54,24 @@ export const mutations = {
   },
   activate (state, id) {
     state.index = state.data.findIndex(item => item.id === id)
+  },
+  next (state) {
+    const index = state.index + state.perPage
+    const max = state.data.length - 1
+    state.index = index > max ? max : index
+  },
+  prev (stae) {
+    const index = state.index - state.perPage
+    state.index = index < 0 ? 0 : index
+  },
+  begin (stae) {
+    state.index = state.data.length > 0 ? 0 : undefined
+  },
+  end (stae) {
+    const max = state.data.length - 1
+    state.index = max
   }
+
 }
 
 export const actions = {
