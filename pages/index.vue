@@ -18,10 +18,10 @@
     </b-row>
     <b-row v-else class="mb-3">
       <b-col id="listview" cols="6">
-        <list :data="data" />
+        <list :data="paginated | list" />
       </b-col>
       <b-col id="mapsview" cols="6">
-        <maps :locations="[]" :data="data" />
+        <maps :data="paginated | maps" />
       </b-col>
     </b-row>
   </b-container>
@@ -36,12 +36,26 @@ import List from '~/components/List.vue'
 
 export default {
   filters: {
-    googleMap (data) {
+    maps (data) {
       return data ? data.map((item) => {
         return {
           id: item.id,
           lat: item.l,
           lng: item.g
+        }
+      }) : []
+    },
+    list (data) {
+      return data ? data.map((item) => {
+        const { id, t, p, r, b, n, i } = item
+        return {
+          id,
+          title: t,
+          price: p,
+          bedrooms: r,
+          bathrooms: b,
+          condition: n,
+          images: i.map(i => i.imageUrl)
         }
       }) : []
     }
@@ -52,27 +66,11 @@ export default {
     Maps,
     List
   },
-  data () {
-    return {
-      page: 1,
-      perPage: 10,
-      paginated: []
-    }
-  },
   computed: {
     debug () {
       return process.env.NODE_ENV === 'development'
     },
-    locations () {
-      return this.$store.getters.paginated.map((item) => {
-        return {
-          id: item.id,
-          lat: item.l,
-          lng: item.g
-        }
-      })
-    },
-    ...mapGetters(['data', 'loading'])
+    ...mapGetters(['data', 'loading', 'paginated'])
   },
   async mounted () {
     await this.fetch()

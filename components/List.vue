@@ -1,6 +1,6 @@
 <template>
   <p>
-    {{ data }}
+    {{ debug }}
   </p>
 </template>
 
@@ -10,6 +10,15 @@ export default {
     data: {
       type: Array,
       required: true
+    }
+  },
+  computed: {
+    debug () {
+      return this.data.map((d) => {
+        return {
+          ...d
+        }
+      })
     }
   }
 }

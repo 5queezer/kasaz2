@@ -1,13 +1,13 @@
 <template>
   <p>
-    {{ JSON.stringify(locations, 2) }}
+    {{ JSON.stringify(data, 2) }}
   </p>
 </template>
 
 <script>
 export default {
   props: {
-    locations: {
+    data: {
       type: Array,
       required: true
     }
