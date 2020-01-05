@@ -17,13 +17,13 @@
       <b-spinner type="grow" label="Loading..." variant="primary" />
     </b-row>
     <b-row v-else class="mb-3 h-100">
-      <b-col id="listview" cols="6" class="h-100">
+      <b-col id="listview" cols="6" class="h-100 overflow-auto pb-5">
         <list :data="paginated | list" />
-        <b-pagination v-model="current" :total-rows="count" :per-page="perPage" class="w-100" />
       </b-col>
       <b-col id="mapsview" cols="6">
         <maps :data="paginated | maps" />
       </b-col>
+      <b-pagination v-model="current" :total-rows="count" :per-page="perPage" class="w-100 fixed-bottom col-6 place-center" />
     </b-row>
   </b-container>
 </template>
@@ -98,11 +98,13 @@ export default {
   overflow: hidden;
 }
 #listview {
-  overflow: hidden auto;
 }
 .loading {
   flex-grow: 1;
   justify-content: center;
   align-items: center;
+}
+.place-center {
+  place-content: center;
 }
 </style>
