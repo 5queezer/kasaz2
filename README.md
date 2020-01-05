@@ -1,6 +1,12 @@
-# test
+![Logo Title](/assets/green-home-icon-64-177826.png?raw=true "Logo")
 
-> Testing kasaz API response
+# kasaz map viewer
+
+> Create a simple page to search for apartments. 
+
+- [kasaz coding challenge](https://github.com/kasaz/coding-challenge)
+- [codesandbox preview](https://codesandbox.io/)
+
 
 ## Build Setup
 
@@ -20,3 +26,9 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## Tests
+``` bash
+# runs all tests
+$ yarn test
+```
