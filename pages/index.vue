@@ -10,7 +10,7 @@
         <navbar />
       </b-col>
     </b-row>
-    <b-row v-if="loading" class="loading">
+    <b-row v-if="loading && data.length === 0" class="loading">
       <b-spinner type="grow" label="Loading..." />
     </b-row>
     <b-row v-else class="mb-3">
