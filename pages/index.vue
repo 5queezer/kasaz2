@@ -1,9 +1,11 @@
 <template>
-  <b-container>
-    <b-row>
-      <logo />
+  <b-container id="main" fluid>
+    <b-row class="mb-3">
+      <b-col>
+        <logo />
+      </b-col>
     </b-row>
-    <b-row>
+    <b-row class="mb-3">
       <b-col>
         <h1>{{ data.length }}</h1>
       </b-col>
