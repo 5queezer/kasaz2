@@ -1,5 +1,5 @@
 <template>
-  <b-container id="main" fluid>
+  <b-container id="main" fluid class="d-flex flex-column">
     <b-row class="mb-3">
       <b-col>
         <logo />
@@ -8,16 +8,12 @@
     <b-row>
       <navbar />
     </b-row>
-    <b-row v-if="!loading && false" class="mb-3">
-      <b-col>
-        <h1>{{ data.length }}</h1>
-      </b-col>
+    <b-row v-if="!loading" class="mb-3">
+      <b-col id="listview" cols="6" />
       <b-col id="mapsview" cols="6" />
     </b-row>
-    <b-row v-else>
-      <b-col>
-        <span>Loading...</span>
-      </b-col>
+    <b-row v-else class="loading">
+      <b-spinner type="grow" label="Loading..." />
     </b-row>
   </b-container>
 </template>
@@ -45,34 +41,12 @@ export default {
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
+#main {
   min-height: 100vh;
-  display: flex;
+}
+.loading {
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
