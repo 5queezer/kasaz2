@@ -1,0 +1,51 @@
+{
+  "id": 30654,
+  "l": 41.3671116159463,
+  "g": 2.13224459693108,
+  "t": "Ático exterior y en buen estado con ascensor en La Bordeta",
+  "i": [
+    {
+      "imageUrl": "https://dywf8esi8sang.cloudfront.net/pictures/3b0baca0d57ea941ba3c60fb0bbdda7d_medium.jpg",
+      "roomType": null
+    },
+    {
+      "imageUrl": "https://dywf8esi8sang.cloudfront.net/pictures/0436f7785a76929ea894d9d89a6c1413_medium.jpg",
+      "roomType": "plan"
+    },
+    {
+      "imageUrl": "https://dywf8esi8sang.cloudfront.net/pictures/19df811d9eec01f0ba80214075c8e90f_medium.jpg",
+      "roomType": null
+    },
+    {
+      "imageUrl": "https://dywf8esi8sang.cloudfront.net/pictures/fd2bbcb29193cd8aad3762c1fe82c3bd_medium.jpg",
+      "roomType": "outdoor_building"
+    },
+    {
+      "imageUrl": "https://dywf8esi8sang.cloudfront.net/pictures/1d7686e5c4118aee64953640b129bd1e_medium.jpg",
+      "roomType": "foyer_entrance"
+    }
+  ],
+  "j": "Carrer de la Riera Blanca",
+  "e": "2019-08-07T12:03:30",
+  "d": [
+    61730,
+    61738,
+    61801
+  ],
+  "m": "/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaitRIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--36da8daa84f0491d52f3b46f13ef6505ad191c65/41.3671277,2.1322497.png",
+  "a": "/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbU5VIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--e0b6b9f93596efeb41f63b6d3e6d1f2dfdf259b8/logoHousell.JPG",
+  "p": 266500,
+  "s": 69,
+  "r": 3,
+  "b": 1,
+  "c": false,
+  "x": false,
+  "n": "good_condition",
+  "w": true,
+  "cn": "Barcelona",
+  "dn": "Sants-Montjuïc",
+  "nn": "La Bordeta",
+  "f": false,
+  "sf": false,
+  "ss": 9
+}

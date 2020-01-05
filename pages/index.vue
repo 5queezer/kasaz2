@@ -5,15 +5,15 @@
     </b-row>
     <b-row>
       <b-col>
-      <h1>{{ data.length }}</h1>
+        <h1>{{ data.length }}</h1>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
+import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
@@ -24,9 +24,9 @@ export default {
   },
   methods: {
     ...mapMutations(['set', 'reset']),
-    ...mapActions(['fetch']),
+    ...mapActions(['fetch'])
   },
-  async mounted() {
+  async mounted () {
     await this.fetch()
   }
 }

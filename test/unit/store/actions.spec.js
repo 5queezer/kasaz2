@@ -1,6 +1,6 @@
 import { actions } from '@/store/index'
 import api from '@/store/api'
-jest.mock( '@/store/api' );
+jest.mock('@/store/api')
 
 describe('store actions', () => {
   let commit
@@ -10,9 +10,9 @@ describe('store actions', () => {
   })
 
   it('can fetch', async () => {
-    const resp = [{id:0},{id:1}]
+    const resp = [{ id: 0 }, { id: 1 }]
     api.getApartments.mockResolvedValue(resp)
-    await actions.fetch({commit})
+    await actions.fetch({ commit })
     expect(commit).toBeCalledWith('set', resp)
   })
 })
