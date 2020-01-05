@@ -1,6 +1,6 @@
 <template>
   <p>
-    {{ paginated }}
+    {{ JSON.stringify(locations, 2) }}
   </p>
 </template>
 
