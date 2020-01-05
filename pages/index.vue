@@ -5,7 +5,7 @@
         <logo />
       </b-col>
       <b-col v-if="debug">
-        debug
+        data.length={{ data.length }}
       </b-col>
     </b-row>
     <b-row>
@@ -13,12 +13,13 @@
         <navbar />
       </b-col>
     </b-row>
-    <b-row v-if="loading && data.length === 0" class="loading">
+    <b-row v-if="loading && count === 0" class="loading">
       <b-spinner type="grow" label="Loading..." variant="primary" />
     </b-row>
-    <b-row v-else class="mb-3">
-      <b-col id="listview" cols="6">
+    <b-row v-else class="mb-3 h-100">
+      <b-col id="listview" cols="6" class="h-100">
         <list :data="paginated | list" />
+        <b-pagination v-model="current" :total-rows="count" :per-page="perPage" class="w-100" />
       </b-col>
       <b-col id="mapsview" cols="6">
         <maps :data="paginated | maps" />
@@ -70,22 +71,34 @@ export default {
     debug () {
       return process.env.NODE_ENV === 'development'
     },
-    ...mapGetters(['data', 'loading', 'paginated'])
+    current: {
+      get () {
+        return this.page
+      },
+      set (value) {
+        this.setPage(value)
+      }
+    },
+    ...mapGetters(['data', 'loading', 'paginated', 'count', 'getIndex', 'perPage', 'page'])
   },
   async mounted () {
     await this.fetch()
-    this.$store.idx = 0
+    this.begin()
   },
   methods: {
     ...mapActions(['fetch']),
-    ...mapMutations(['activate'])
+    ...mapMutations(['activate', 'setPage', 'begin'])
   }
 }
 </script>
 
 <style>
 #main {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+}
+#listview {
+  overflow: hidden auto;
 }
 .loading {
   flex-grow: 1;
