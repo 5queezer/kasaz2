@@ -52,4 +52,8 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
+[v-cloak] {
+  display: none;
+}
 </style>

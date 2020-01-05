@@ -5,30 +5,39 @@
         <logo />
       </b-col>
     </b-row>
-    <b-row class="mb-3">
+    <b-row>
+      <navbar />
+    </b-row>
+    <b-row v-if="!loading && false" class="mb-3">
       <b-col>
         <h1>{{ data.length }}</h1>
+      </b-col>
+    </b-row>
+    <b-row v-else>
+      <b-col>
+        <span>Loading...</span>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import { mapMutations, mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Logo from '~/components/Logo.vue'
+import Navbar from '~/components/Navbar.vue'
 
 export default {
   components: {
-    Logo
+    Logo,
+    Navbar
   },
   computed: {
-    ...mapGetters(['data'])
+    ...mapGetters(['data', 'loading'])
   },
   async mounted () {
     await this.fetch()
   },
   methods: {
-    ...mapMutations(['save', 'reset']),
     ...mapActions(['fetch'])
   }
 }
