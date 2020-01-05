@@ -1,10 +1,10 @@
 <template>
   <b-form-row>
     <b-col>
-      <b-form-select v-model="min" :options="dataMin" />
+      <b-form-select v-model="min" :options="dataMin" @changed="emit($event, min)" />
     </b-col>
     <b-col>
-      <b-form-select v-model="max" :options="dataMax" />
+      <b-form-select v-model="max" :options="dataMax" @changed="emit($event, min)" />
     </b-col>
   </b-form-row>
 </template>
@@ -43,6 +43,8 @@ export default {
           disabled: !value
         }
       })
+    },
+    emit (event, value) {
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <p>
-    test
+    {{ paginated }}
   </p>
 </template>
 
