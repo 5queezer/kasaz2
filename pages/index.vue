@@ -6,7 +6,9 @@
       </b-col>
     </b-row>
     <b-row>
-      <navbar />
+      <b-col>
+        <navbar />
+      </b-col>
     </b-row>
     <b-row v-if="!loading" class="mb-3">
       <b-col id="listview" cols="6" />
