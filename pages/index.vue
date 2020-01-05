@@ -22,12 +22,12 @@ export default {
   computed: {
     ...mapGetters(['data'])
   },
-  methods: {
-    ...mapMutations(['set', 'reset']),
-    ...mapActions(['fetch'])
-  },
   async mounted () {
     await this.fetch()
+  },
+  methods: {
+    ...mapMutations(['save', 'reset']),
+    ...mapActions(['fetch'])
   }
 }
 </script>
