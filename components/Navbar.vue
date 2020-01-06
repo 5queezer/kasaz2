@@ -2,12 +2,12 @@
   <b-navbar toggleable="lg">
     <b-navbar-nav>
       <b-nav-item>
-        <b-input />
+        <search-box />
       </b-nav-item>
     </b-navbar-nav>
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav class="ml-3">
+      <b-navbar-nav class="ml-auto">
         <range
           :values="priceRange"
           name="Price"
@@ -38,11 +38,13 @@
 import { mapMutations } from 'vuex'
 import Range from '~/components/Range.vue'
 import Selectr from '~/components/Selectr.vue'
+import SearchBox from '~/components/Searchbox.vue'
 
 export default {
   components: {
     Range,
-    Selectr
+    Selectr,
+    SearchBox
   },
   computed: {
     surfaceRange () {
@@ -63,13 +65,13 @@ export default {
       const { min, max } = value
       if (min || max) {
         if (min) {
-          this.set({ key: `filters[${setting}][min]`, value: min || undefined })
+          this.set({ key: `filters[${setting}][min]`, value: min || null })
         }
         if (max) {
-          this.set({ key: `filters[${setting}][max]`, value: max || undefined })
+          this.set({ key: `filters[${setting}][max]`, value: max || null })
         }
-      } else {
-        this.set({ key: `filters[${setting}]`, value: value || undefined })
+      } else if (value) {
+        this.set({ key: `filters[${setting}]`, value: value || null })
       }
     },
     ...mapMutations('filters', ['set'])

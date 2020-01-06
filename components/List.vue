@@ -1,5 +1,5 @@
 <template>
-  <b-list-group v-if="data.length > 0">
+  <b-list-group v-if="count > 0">
     <b-list-group-item v-for="item in data" :key="item.id" class="p-1">
       <b-row>
         <b-col cols="6">
@@ -14,7 +14,7 @@
       </b-row>
     </b-list-group-item>
   </b-list-group>
-  <div v-else class="d-flex align-items-start justify-content-center">
+  <div v-else-if="!loading" class="d-flex align-items-start justify-content-center">
     <b-alert show variant="danger">
       No data for your current filter settings
     </b-alert>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
 
   props: {
@@ -35,24 +35,25 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapGetters(['loading', 'count'])
+  },
   methods: {
-    activate () {
-      const vm = this
-      // `Object.assign` merges objects together to form a new object
-      return Object.assign({},
-        // We add all the listeners from the parent
-        this.$listeners,
-        // Then we can add custom listeners or override the
-        // behavior of some listeners.
-        {
-          // This ensures that the component works with v-model
-          input (event) {
-            vm.$emit('input', event.target.key)
-          }
-        }
-      )
-      // this.$emit('input', event.target.key)
-    }
+    // activate () {
+    //   const vm = this
+    //   return Object.assign({},
+    //     // We add all the listeners from the parent
+    //     this.$listeners,
+    //     // Then we can add custom listeners or override the
+    //     // behavior of some listeners. This ensures that
+    //     // the component works with v-model
+    //     {
+    //       input (event) {
+    //         vm.$emit('input', event.target.key)
+    //       }
+    //     }
+    //   )
+    // }
   }
 }
 </script>
