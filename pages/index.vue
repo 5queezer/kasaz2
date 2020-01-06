@@ -18,7 +18,7 @@
     </b-row>
     <b-row v-else class="mb-3 h-100">
       <b-col id="listview" cols="6" class="h-100 overflow-auto pb-5">
-        <list :data="paginated | list" />
+        <list v-model="currentId" :data="paginated | list" />
       </b-col>
       <b-col id="mapsview" cols="6">
         <maps :data="paginated | maps" />
@@ -75,11 +75,19 @@ export default {
       get () {
         return this.page
       },
-      set (value) {
-        this.setPage(value)
+      set (index) {
+        this.setPage(index)
       }
     },
-    ...mapGetters(['data', 'loading', 'paginated', 'count', 'getIndex', 'perPage', 'page'])
+    currentId: {
+      get () {
+        return this.getId
+      },
+      set (id) {
+        this.activate(id)
+      }
+    },
+    ...mapGetters(['data', 'loading', 'paginated', 'count', 'getIndex', 'getId', 'perPage', 'page'])
   },
   async mounted () {
     await this.fetch()

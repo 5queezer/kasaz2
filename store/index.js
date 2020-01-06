@@ -21,7 +21,7 @@ export const getters = {
     return state.perPage
   },
   paginated (state, getters) {
-    const start = (getters.page % state.perPage) - 1
+    const start = getters.page * state.perPage - 1
     const end = start + state.perPage
     return getters.data.slice(start, end)
   },
@@ -30,6 +30,9 @@ export const getters = {
   },
   getIndex (state) {
     return state.index
+  },
+  getId (state) {
+    return state.index && state.data ? state.data[state.index].id : 0
   }
 }
 
