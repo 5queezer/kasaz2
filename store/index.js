@@ -1,4 +1,4 @@
-import api from './api'
+import api from '@/assets/api'
 
 export const state = () => ({
   data: [],

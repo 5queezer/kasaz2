@@ -1,7 +1,7 @@
 import apartmentFixture from './fixtures/apartment.json'
 import { actions } from '@/store/index'
-import api from '@/store/api'
-jest.mock('@/store/api')
+import api from '@/assets/api'
+jest.mock('@/assets/api')
 
 describe('store actions', () => {
   let commit
