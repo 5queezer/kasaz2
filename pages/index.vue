@@ -1,6 +1,6 @@
 <template>
   <b-container id="main" fluid class="h-100vh d-flex flex-column">
-    <b-row class="mb-3 pt-5">
+    <b-row class="mb-2 pt-5">
       <b-col>
         <logo />
       </b-col>
@@ -11,7 +11,7 @@
         </dl>
       </b-col>
     </b-row>
-    <b-row>
+    <b-row class="mb-2">
       <b-col>
         <navbar />
       </b-col>
@@ -19,10 +19,10 @@
     <b-row v-if="loading && count === 0" class="loading">
       <b-spinner type="grow" label="Loading..." variant="primary" />
     </b-row>
-    <b-row v-else class="mb-3 flex-fill overflow-hidden">
+    <b-row v-else class="mb-2 flex-fill overflow-hidden">
       <b-col cols="6" class="h-100 d-flex flex-column">
         <list id="listview" v-model="currentId" :data="paginated | list" />
-        <b-pagination v-model="currentPage" :total-rows="count" :per-page="perPage" class="w-100 mt-3 d-flex justify-content-center" />
+        <b-pagination v-model="currentPage" :total-rows="count" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
         <maps :data="paginated | maps" />
