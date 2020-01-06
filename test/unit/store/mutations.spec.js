@@ -1,7 +1,7 @@
 import apartmentFixture from './fixtures/apartment.json'
 import { mutations, state } from '@/store/index'
 
-describe('Mutations', () => {
+describe('Main Data Mutations', () => {
   let fixture
 
   beforeEach(() => {
@@ -53,20 +53,5 @@ describe('Mutations', () => {
 
     // second call
     expect(call).toThrowError(Error)
-  })
-
-  it('can set a filter', () => {
-    const name = 'filters[price][max]'
-    const newValue = 1e6
-    mutations.setFilter(state, { name, newValue })
-    expect(state.filter).toHaveProperty(name, newValue)
-  })
-
-  it('can remove a filter', () => {
-    const name = 'filters[price][max]'
-    const newValue = 1e6
-    mutations.setFilter(state, { name, newValue })
-    mutations.setFilter(state, { name, newValue: undefined })
-    expect(state.filter).not.toHaveProperty(name)
   })
 })

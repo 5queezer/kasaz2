@@ -37,11 +37,8 @@ export const getters = {
   },
   getId (state) {
     return state.index && state.data ? state.data[state.index].id : 0
-  },
-  getFilter (state) {
-    // non-reactive and thus cannot be watched
-    return state.filter
   }
+
 }
 
 export const mutations = {
@@ -62,9 +59,6 @@ export const mutations = {
   reset (state) {
     state.data = []
     state.index = undefined
-    state.filter = {
-      'filters[sortBy]': 'relevance'
-    }
   },
   save (state, data) {
     state.data = data
@@ -95,14 +89,8 @@ export const mutations = {
   end (state) {
     const max = state.data.length - 1
     state.index = max
-  },
-  setFilter (state, { name, newValue }) {
-    if (newValue === null || newValue === undefined) {
-      delete state.filter[name]
-    } else {
-      state.filter[name] = newValue
-    }
   }
+
 }
 
 export const actions = {
