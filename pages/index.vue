@@ -19,7 +19,7 @@
     <b-row v-else class="mb-3 h-100">
       <b-col cols="6" class="h-100 d-flex flex-column">
         <list id="listview" v-model="currentId" :data="paginated | list" />
-        <b-pagination v-model="current" :total-rows="count" :per-page="perPage" class="w-100 mt-3 d-flex justify-content-center" />
+        <b-pagination v-model="currentPage" :total-rows="count" :per-page="perPage" class="w-100 mt-3 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
         <maps :data="paginated | maps" />
@@ -71,7 +71,7 @@ export default {
     debug () {
       return process.env.NODE_ENV === 'development'
     },
-    current: {
+    currentPage: {
       get () {
         return this.page
       },
@@ -90,6 +90,10 @@ export default {
     ...mapGetters(['data', 'loading', 'paginated', 'count', 'getIndex', 'getId', 'perPage', 'page'])
   },
   async mounted () {
+    // const params = {
+    //   'filters[price][min]': 90000,
+    //   'filters[price][max]': 100000
+    // }
     await this.fetch()
     this.begin()
   },
@@ -108,12 +112,6 @@ export default {
   flex-grow: 1;
   justify-content: center;
   align-items: center;
-}
-.place-center {
-  place-content: center;
-}
-.b-pagination {
-
 }
 #listview {
   overflow-y: auto;
