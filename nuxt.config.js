@@ -30,7 +30,8 @@ export default {
   */
   plugins: [
     '@/plugins/google-maps',
-    '@/plugins/vue-lodash'
+    '@/plugins/vue-lodash',
+    '@/plugins/filters'
   ],
   /*
   ** Nuxt.js dev-modules

@@ -3,13 +3,13 @@
     <b-list-group-item v-for="item in data" :key="item.id" class="p-1">
       <b-row>
         <b-col cols="6">
-          <carousel>
+          <!-- carousel>
             <img v-for="(image, index) in item.images" :key="index" :src="image">
-          </carousel>
+          </carousel -->
         </b-col>
         <b-col cols="6">
           {{ item.title }}
-          {{ item.price }}
+          {{ item.price | toLocale('€') }}
         </b-col>
       </b-row>
     </b-list-group-item>

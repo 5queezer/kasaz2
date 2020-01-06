@@ -4,7 +4,7 @@ export const state = () => ({
   data: [],
   loading: false,
   index: undefined,
-  perPage: 10
+  perPage: 20
 })
 
 export const getters = {

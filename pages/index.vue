@@ -1,5 +1,5 @@
 <template>
-  <b-container id="main" fluid class="d-flex flex-column">
+  <b-container id="main" fluid class="h-100vh d-flex flex-column">
     <b-row class="mb-3 pt-5">
       <b-col>
         <logo />
@@ -17,13 +17,13 @@
       <b-spinner type="grow" label="Loading..." variant="primary" />
     </b-row>
     <b-row v-else class="mb-3 h-100">
-      <b-col id="listview" cols="6" class="h-100 overflow-auto pb-5">
-        <list v-model="currentId" :data="paginated | list" />
+      <b-col cols="6" class="h-100 d-flex flex-column">
+        <list id="listview" v-model="currentId" :data="paginated | list" />
+        <b-pagination v-model="current" :total-rows="count" :per-page="perPage" class="w-100 mt-3 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
         <maps :data="paginated | maps" />
       </b-col>
-      <b-pagination v-model="current" :total-rows="count" :per-page="perPage" class="w-100 fixed-bottom col-6 place-center" />
     </b-row>
   </b-container>
 </template>
@@ -101,11 +101,8 @@ export default {
 </script>
 
 <style>
-#main {
+.h-100vh {
   height: 100vh;
-  overflow: hidden;
-}
-#listview {
 }
 .loading {
   flex-grow: 1;
@@ -114,5 +111,13 @@ export default {
 }
 .place-center {
   place-content: center;
+}
+.b-pagination {
+
+}
+#listview {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%
 }
 </style>
