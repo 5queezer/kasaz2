@@ -54,4 +54,19 @@ describe('Mutations', () => {
     // second call
     expect(call).toThrowError(Error)
   })
+
+  it('can set a filter', () => {
+    const name = 'filters[price][max]'
+    const value = 1e6
+    mutations.setFilter(state, name, value)
+    expect(state.filter).toHaveProperty(name, value)
+  })
+
+  it('can remove a filter', () => {
+    const name = 'filters[price][max]'
+    const value = 1e6
+    mutations.setFilter(state, name, value)
+    mutations.setFilter(state, name, undefined)
+    expect(state.filter).not.toHaveProperty(name)
+  })
 })

@@ -4,7 +4,8 @@ export const state = () => ({
   data: [],
   loading: false,
   index: undefined,
-  perPage: 20
+  perPage: 20,
+  filter: {}
 })
 
 export const getters = {
@@ -55,6 +56,7 @@ export const mutations = {
   reset (state) {
     state.data = []
     state.index = undefined
+    state.filter = {}
   },
   save (state, data) {
     state.data = data
@@ -85,8 +87,14 @@ export const mutations = {
   end (state) {
     const max = state.data.length - 1
     state.index = max
+  },
+  setFilter (state, name, value) {
+    if (value !== null && value !== undefined) {
+      state.filter[name] = value
+    } else {
+      delete state.filter[name]
+    }
   }
-
 }
 
 export const actions = {
