@@ -34,13 +34,13 @@ export default {
       if (this.max && newValue > this.max) {
         this.max = newValue
       }
-      this.set({ key: 'filters[price][min]', value: newValue })
+      this.set({ key: 'filters[surface][min]', value: newValue })
     },
     max (newValue) {
       if (this.min && newValue < this.min) {
         this.min = newValue
       }
-      this.set({ key: 'filters[price][max]', value: newValue })
+      this.set({ key: 'filters[surface][max]', value: newValue })
     }
   },
   methods: {

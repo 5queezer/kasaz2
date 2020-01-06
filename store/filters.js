@@ -40,8 +40,8 @@ export const mutations = {
           min: undefined,
           max: undefined
         },
-        bedrooms: 'all',
-        bathrooms: 'all'
+        bedrooms: undefined,
+        bathrooms: undefined
       },
       locale: 'es',
       location: { city: 'Barcelona' },
@@ -52,6 +52,7 @@ export const mutations = {
         swLng: undefined
       }
     }
+    Object.freeze(init)
 
     for (const [key, value] of Object.entries(init)) {
       state[key] = value
