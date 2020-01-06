@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   // eslint-disable-next-line vue/require-prop-types
@@ -34,13 +34,13 @@ export default {
       if (newValue > this.max) {
         this.max = newValue
       }
-      this.setFilter('filters[price][min]', newValue)
+      this.setFilter({ name: 'filters[price][min]', newValue })
     },
     max (newValue) {
       if (newValue < this.min) {
         this.min = newValue
       }
-      this.setFilter('filters[price][max]', newValue)
+      this.setFilter({ name: 'filters[price][max]', newValue })
     }
   },
   methods: {
@@ -54,7 +54,7 @@ export default {
         }
       })
     },
-    ...mapActions(['setFilter'])
+    ...mapMutations(['setFilter'])
   }
 }
 </script>

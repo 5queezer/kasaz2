@@ -5,7 +5,10 @@
         <logo />
       </b-col>
       <b-col v-if="debug">
-        data.length={{ data.length }}
+        <dl>
+          <dt>data.length</dt><dd>{{ count }}</dd>
+          <dt>getFilter</dt><dd>{{ $store.getters.getFilter }}</dd>
+        </dl>
       </b-col>
     </b-row>
     <b-row>
@@ -87,7 +90,12 @@ export default {
         this.activate(id)
       }
     },
-    ...mapGetters(['data', 'loading', 'paginated', 'count', 'getIndex', 'getId', 'perPage', 'page'])
+    ...mapGetters(['loading', 'paginated', 'count', 'getIndex', 'getId', 'perPage', 'page', 'getFilter'])
+  },
+  watch: {
+    getFilter (newValue) {
+      console.log(newValue)
+    }
   },
   async mounted () {
     // const params = {
