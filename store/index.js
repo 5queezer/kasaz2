@@ -21,9 +21,10 @@ export const getters = {
     return state.perPage
   },
   paginated (state, getters) {
-    const start = getters.page * state.perPage - 1
+    const start = (getters.page - 1) * state.perPage
     const end = start + state.perPage
-    return getters.data.slice(start, end)
+    const max = state.data.length - 1
+    return getters.data.slice(start, end > max ? max : end)
   },
   count (state) {
     return state.data.length
