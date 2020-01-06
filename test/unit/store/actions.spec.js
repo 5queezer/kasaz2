@@ -12,7 +12,7 @@ describe('store actions', () => {
     fixture = JSON.parse(JSON.stringify(apartmentFixture))
   })
 
-  it('can fetch', async () => {
+  it('fetch data from server', async () => {
     api.getApartments.mockResolvedValue([fixture])
     await actions.fetch({ commit })
     expect(commit).toBeCalledWith('save', [fixture])

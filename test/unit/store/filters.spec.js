@@ -5,46 +5,65 @@ describe('Filter Mutations', () => {
     mutations.reset(state)
   })
 
-  it('can set a filter with key and value', () => {
+  it('set a filter with { key, value }', () => {
     const key = 'filters[price][max]'
     const value = 1e6
+
+    // set
     mutations.set(state, { key, value })
     expect(state.filters.price).toHaveProperty('max', value)
   })
 
-  it('can set a filter with an object', () => {
-    const newValue = 1e6
+  it('set a filter with an object of settings', () => {
+    const value = 1e6
     const filters = {
       price: {
-        max: newValue
+        max: value
       }
     }
+
+    // set
     mutations.set(state, { filters })
-    expect(state.filters.price).toHaveProperty('max', newValue)
+    expect(state.filters.price).toHaveProperty('max', value)
   })
 
-  it('can remove a filter', () => {
-    let key = 'filters[price][max]'
+  it('remove a filter with { key, value } 1', () => {
+    const key = 'filters[price][max]'
     const value = 1e6
-    mutations.set(state, { key, value })
-    mutations.set(state, { key, value: undefined })
-    expect(state).not.toHaveProperty(name)
 
-    key = 'filters[bathrooms]'
+    // set
     mutations.set(state, { key, value })
-    mutations.set(state, { key, value: undefined })
-    expect(state).not.toHaveProperty(name)
+    expect(state.filters.price).toHaveProperty('max', value)
+
+    // remove
+    mutations.set(state, { key, value: null })
+    expect(state.filters.price).not.toHaveProperty('max')
+  })
+  it('remove a filter with { key, value } 2', () => {
+    const key = 'filters[bathrooms]'
+    const value = 1
+
+    // set
+    mutations.set(state, { key, value })
+    expect(state.filters).toHaveProperty('bathrooms', value)
+
+    // remove
+    mutations.set(state, { key, value: null })
+    expect(state.filters).not.toHaveProperty('bathrooms')
   })
 
-  it('can remove a filter object-style', () => {
+  it('remove a filter with an object-scheme', () => {
     const filters = {
       price: {
         max: 1e6
       },
       bedrooms: 1
     }
+
+    // set
     mutations.set(state, { filters })
 
+    // remove
     filters.price.max = undefined
     filters.bedrooms = undefined
     mutations.set(state, { filters })

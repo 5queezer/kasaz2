@@ -9,7 +9,7 @@ describe('Main Data Mutations', () => {
     fixture = JSON.parse(JSON.stringify(apartmentFixture))
   })
 
-  it('adds a new apartment', () => {
+  it('add a new apartment', () => {
     // act
     mutations.add(state, fixture)
 
@@ -18,7 +18,7 @@ describe('Main Data Mutations', () => {
     expect(state.data[0]).toEqual(fixture)
   })
 
-  it('can assign an array', () => {
+  it('save', () => {
     const max = 100
     const data = []
     for (let i = 0; i < max; i++) {
@@ -33,7 +33,7 @@ describe('Main Data Mutations', () => {
     expect(state.data.length).toBe(max)
   })
 
-  it('can activate entry by object id', () => {
+  it('activate entry by object id', () => {
     const id = fixture.id
 
     // act
@@ -44,7 +44,7 @@ describe('Main Data Mutations', () => {
     expect(state.index).toBe(0)
   })
 
-  it('throws error with entry of same id', () => {
+  it('throw error with entry of same id', () => {
     fixture.id = 0
     const call = () => mutations.add(state, fixture)
 

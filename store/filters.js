@@ -1,9 +1,9 @@
 export const state = () => ({
   // init state with reset first
-  filters: {},
-  locale: '',
-  location: {},
-  viewport: {}
+  // filters: {},
+  // locale: '',
+  // location: {},
+  // viewport: {}
 })
 export const getters = {
   get (state) {
@@ -12,32 +12,33 @@ export const getters = {
 }
 export const mutations = {
   set (state, param) {
-    if (typeof param === 'object') {
-      if (param.key && param.value) {
-        const value = param.value
-        const command = param.key.split(']').join('').split(/\[+/)
-        const last = command.pop()
-        let key = state
-        command.forEach((attribute) => {
-          key = key[attribute]
-        })
-        if (value !== undefined && value !== null) {
-          key[last] = value
-        } else {
-          delete key[last]
-        }
+    if (param.key && typeof param.value !== 'undefined') {
+      // key as string of object structure
+      // e.g. filters[price][max]
+      const value = param.value
+      const command = param.key.split(']').join('').split(/\[+/)
+      const last = command.pop()
+      let key = state
+      command.forEach((attribute) => {
+        key = key[attribute]
+      })
+      if (value === null) {
+        delete key[last]
       } else {
-        for (const [key, value] of Object.entries(param)) {
-          if (value !== undefined && value !== null) {
-            state[key] = JSON.parse(JSON.stringify(value))
-          } else {
-            delete state[key]
-          }
+        key[last] = value
+      }
+    } else {
+      for (const [key, value] of Object.entries(param)) {
+        if (value !== undefined && value !== null) {
+          state[key] = JSON.parse(JSON.stringify(value))
+        } else {
+          delete state[key]
         }
       }
     }
   },
   reset (state) {
+    // filter scheme
     const init = {
       filters: {
         sortby: 'relevance',
