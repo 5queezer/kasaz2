@@ -24,8 +24,13 @@ describe('Filter Mutations', () => {
   })
 
   it('can remove a filter', () => {
-    const key = 'filters[price][max]'
+    let key = 'filters[price][max]'
     const value = 1e6
+    mutations.set(state, { key, value })
+    mutations.set(state, { key, value: undefined })
+    expect(state).not.toHaveProperty(name)
+
+    key = 'filters[bathrooms]'
     mutations.set(state, { key, value })
     mutations.set(state, { key, value: undefined })
     expect(state).not.toHaveProperty(name)
@@ -35,11 +40,16 @@ describe('Filter Mutations', () => {
     const filters = {
       price: {
         max: 1e6
-      }
+      },
+      bedrooms: 1
     }
     mutations.set(state, { filters })
+
     filters.price.max = undefined
+    filters.bedrooms = undefined
     mutations.set(state, { filters })
+
     expect(state.filters.price).not.toHaveProperty('max')
+    expect(state.filters).not.toHaveProperty('bedrooms')
   })
 })
