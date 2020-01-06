@@ -32,3 +32,12 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 # runs all tests
 $ yarn test
 ```
+
+## Google Maps
+```bash
+# copy sample env file
+cp env_sample .env
+nano .env
+```
+
+Enter your Google Maps api key and save the file.
