@@ -14,16 +14,25 @@ export const mutations = {
   set (state, param) {
     if (typeof param === 'object') {
       if (param.key && param.value) {
+        const value = param.value
         const command = param.key.split(']').join('').split(/\[+/)
         const last = command.pop()
-        let path = state
+        let key = state
         command.forEach((attribute) => {
-          path = path[attribute]
+          key = key[attribute]
         })
-        path[last] = param.value
+        if (value !== undefined && value !== null) {
+          key[last] = value
+        } else {
+          delete key[last]
+        }
       } else {
         for (const [key, value] of Object.entries(param)) {
-          state[key] = JSON.parse(JSON.stringify(value))
+          if (value !== undefined && value !== null) {
+            state[key] = JSON.parse(JSON.stringify(value))
+          } else {
+            delete state[key]
+          }
         }
       }
     }
