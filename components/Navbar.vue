@@ -23,6 +23,10 @@ export default {
     areaRange () {
       return this.lodash.range(0, 40, 5).concat(this.lodash.range(40, 151, 10)).concat(200, 300)
     }
+  },
+  mounted () {
+    const { commit } = this.$store
+    commit('filters/reset')
   }
 }
 </script>

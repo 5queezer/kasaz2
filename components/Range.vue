@@ -31,16 +31,16 @@ export default {
   },
   watch: {
     min (newValue) {
-      if (newValue > this.max) {
+      if (this.max && newValue > this.max) {
         this.max = newValue
       }
-      this.setFilter({ name: 'filters[price][min]', newValue })
+      this.set({ key: 'filters[price][min]', value: newValue })
     },
     max (newValue) {
-      if (newValue < this.min) {
+      if (this.min && newValue < this.min) {
         this.min = newValue
       }
-      this.setFilter({ name: 'filters[price][max]', newValue })
+      this.set({ key: 'filters[price][max]', value: newValue })
     }
   },
   methods: {
@@ -54,7 +54,7 @@ export default {
         }
       })
     },
-    ...mapMutations(['setFilter'])
+    ...mapMutations('filters', ['set'])
   }
 }
 </script>

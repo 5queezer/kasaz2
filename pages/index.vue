@@ -7,7 +7,7 @@
       <b-col v-if="debug">
         <dl>
           <dt>data.length</dt><dd>{{ count }}</dd>
-          <dt>getFilter</dt><dd>{{ $store.getters.getFilter }}</dd>
+          <dt>filter get</dt><dd>{{ getFilter }}</dd>
         </dl>
       </b-col>
     </b-row>
@@ -90,12 +90,8 @@ export default {
         this.activate(id)
       }
     },
-    ...mapGetters(['loading', 'paginated', 'count', 'getIndex', 'getId', 'perPage', 'page', 'getFilter'])
-  },
-  watch: {
-    getFilter (newValue) {
-      console.log(newValue)
-    }
+    ...mapGetters(['loading', 'paginated', 'count', 'getIndex', 'getId', 'perPage', 'page']),
+    ...mapGetters('filters', { getFilter: 'get' })
   },
   async mounted () {
     // const params = {
