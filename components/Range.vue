@@ -1,16 +1,23 @@
 <template>
   <b-form-row>
     <b-col>
-      <b-form-select v-model="min" :options="dataMin" @changed="emit($event, min)" />
+      <b-form-select
+        v-model="min"
+        :options="dataMin"
+        @change="updateMin()"
+      />
     </b-col>
     <b-col>
-      <b-form-select v-model="max" :options="dataMax" @changed="emit($event, min)" />
+      <b-form-select
+        v-model="max"
+        :options="dataMax"
+        @change="updateMax()"
+      />
     </b-col>
   </b-form-row>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 
 export default {
   // eslint-disable-next-line vue/require-prop-types
@@ -30,31 +37,31 @@ export default {
     }
   },
   watch: {
-    min (newValue) {
-      if (this.max && newValue > this.max) {
-        this.max = newValue
-      }
-      this.set({ key: 'filters[surface][min]', value: newValue })
-    },
-    max (newValue) {
-      if (this.min && newValue < this.min) {
-        this.min = newValue
-      }
-      this.set({ key: 'filters[surface][max]', value: newValue })
-    }
+
   },
   methods: {
+    updateMin () {
+      if (this.max && this.min > this.max) {
+        this.max = this.min
+      }
+      this.$emit('change', { min: this.min })
+    },
+    updateMax () {
+      if (this.min && this.max < this.min) {
+        this.min = this.max
+      }
+      this.$emit('change', { max: this.max })
+    },
     selectData (str) {
       return this.values.map((value) => {
         const valueLocale = this.$options.filters.toLocale(value, this.unit)
         return {
-          value: value || undefined,
+          value,
           text: value ? valueLocale : `-- ${this.name} ${str} --`,
           disabled: !value
         }
       })
-    },
-    ...mapMutations('filters', ['set'])
+    }
   }
 }
 </script>
