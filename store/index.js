@@ -35,6 +35,9 @@ export const getters = {
   },
   getId (state) {
     return state.index && state.data ? state.data[state.index].id : 0
+  },
+  getFilter (state) {
+    return state.filter
   }
 }
 
@@ -89,10 +92,10 @@ export const mutations = {
     state.index = max
   },
   setFilter (state, name, value) {
-    if (value !== null && value !== undefined) {
-      state.filter[name] = value
-    } else {
+    if (value === null || value === undefined) {
       delete state.filter[name]
+    } else {
+      state.filter[name] = value
     }
   }
 }

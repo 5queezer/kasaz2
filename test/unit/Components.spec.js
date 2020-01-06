@@ -8,7 +8,7 @@ import Navbar from '@/components/Navbar.vue'
 describe('Google Maps', () => {
   const options = {
     propsData: {
-      locations: []
+      data: []
     }
   }
 
@@ -33,6 +33,7 @@ describe('Navbar', () => {
   const localVue = createLocalVue()
   localVue.use(VueLodash, { name: 'lodash' })
   localVue.use(Bootstrap)
+  localVue.filter('toLocale', jest.fn())
 
   const options = {
     localVue

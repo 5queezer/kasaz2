@@ -10,13 +10,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
-  filters: {
-    locale (item) {
-      return item ? item.toLocaleString() : ''
-    }
-  },
   // eslint-disable-next-line vue/require-prop-types
   props: ['unit', 'values', 'name'],
   data: () => {
@@ -33,19 +29,32 @@ export default {
       return this.selectData('max')
     }
   },
+  watch: {
+    min (newValue) {
+      if (newValue > this.max) {
+        this.max = newValue
+      }
+      this.setFilter('filters[price][min]', newValue)
+    },
+    max (newValue) {
+      if (newValue < this.min) {
+        this.min = newValue
+      }
+      this.setFilter('filters[price][max]', newValue)
+    }
+  },
   methods: {
     selectData (str) {
       return this.values.map((value) => {
-        const valueLocale = this.$options.filters.locale(value)
+        const valueLocale = this.$options.filters.toLocale(value, this.unit)
         return {
-          value,
-          text: value ? `${valueLocale} ${this.unit}` : `-- ${this.name} ${str} --`,
+          value: value || undefined,
+          text: value ? valueLocale : `-- ${this.name} ${str} --`,
           disabled: !value
         }
       })
     },
-    emit (event, value) {
-    }
+    ...mapActions(['setFilter'])
   }
 }
 </script>
