@@ -1,20 +1,22 @@
 <template>
-  <b-form-row>
-    <b-col>
-      <b-form-select
-        v-model="min"
-        :options="dataMin"
-        @change="updateMin()"
-      />
-    </b-col>
-    <b-col>
-      <b-form-select
-        v-model="max"
-        :options="dataMax"
-        @change="updateMax()"
-      />
-    </b-col>
-  </b-form-row>
+  <b-nav-item>
+    <b-form-row>
+      <b-col>
+        <b-form-select
+          v-model="min"
+          :options="dataMin"
+          @change="updateMin()"
+        />
+      </b-col>
+      <b-col>
+        <b-form-select
+          v-model="max"
+          :options="dataMax"
+          @change="updateMax()"
+        />
+      </b-col>
+    </b-form-row>
+  </b-nav-item>
 </template>
 
 <script>
@@ -36,9 +38,6 @@ export default {
       return this.selectData('max')
     }
   },
-  watch: {
-
-  },
   methods: {
     updateMin () {
       if (this.max && this.min > this.max) {
@@ -57,8 +56,8 @@ export default {
         const valueLocale = this.$options.filters.toLocale(value, this.unit)
         return {
           value,
-          text: value ? valueLocale : `-- ${this.name} ${str} --`,
-          disabled: !value
+          text: value ? valueLocale : `-- ${this.name} ${str} --`
+          // disabled: !value
         }
       })
     }

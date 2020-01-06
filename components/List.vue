@@ -1,5 +1,5 @@
 <template>
-  <b-list-group v-bind="$attrs">
+  <b-list-group v-if="data.length > 0">
     <b-list-group-item v-for="item in data" :key="item.id" class="p-1">
       <b-row>
         <b-col cols="6">
@@ -14,6 +14,11 @@
       </b-row>
     </b-list-group-item>
   </b-list-group>
+  <div v-else class="d-flex align-items-start justify-content-center">
+    <b-alert show variant="danger">
+      No data for your current filter settings
+    </b-alert>
+  </div>
 </template>
 
 <script>
@@ -28,15 +33,6 @@ export default {
     value: {
       type: Number,
       required: true
-    }
-  },
-  computed: {
-    debug () {
-      return this.data.map((d) => {
-        return {
-          ...d
-        }
-      })
     }
   },
   methods: {
