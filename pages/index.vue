@@ -14,7 +14,7 @@
         <b-pagination v-model="currentPage" :total-rows="count - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
-        <maps :data="paginated | maps" />
+        <maps :data="data | maps" />
       </b-col>
     </b-row>
   </b-container>
@@ -83,7 +83,7 @@ export default {
         this.activate(id)
       }
     },
-    ...mapGetters(['loading', 'paginated', 'count', 'getIndex', 'getId', 'perPage', 'page']),
+    ...mapGetters(['loading', 'paginated', 'data', 'count', 'getIndex', 'getId', 'perPage', 'page']),
     ...mapGetters('filters', { getFilter: 'get' })
   },
   async mounted () {
