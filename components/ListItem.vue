@@ -1,5 +1,5 @@
 <template>
-  <b-card class="card mr-2" :class="active ? 'shadow':''" @mouseenter="slide = true" @mouseleave="slide = false">
+  <b-card class="card mr-2" :class="item.id == getId ? 'shadow bg-primary text-light':''" @mouseenter="slide = true" @mouseleave="slide = false" @click="activate(item.id)">
     <b-card-header class="p-0 flex-grow-1 border-bottom-0 overflow-hidden position-relative image" :style="{ 'background-image': `url(${image(index)})` }" rel="preload">
       <b-badge v-if="item.condition" :variant="condition(item.condition)" class="sticky-top float-right mr-2 mt-2">
         {{ item.condition | condition }}
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   filters: {
     condition (label) {
@@ -48,6 +49,9 @@ export default {
       slide: false,
       interval: 1000
     }
+  },
+  computed: {
+    ...mapGetters(['getId'])
   },
   mounted () {
     setInterval(() => {
@@ -81,7 +85,8 @@ export default {
           : condition === 'remodeled' ? 'danger'
             : condition === 'to_remodel' ? 'warning'
               : 'light'
-    }
+    },
+    ...mapMutations(['activate'])
   }
 }
 </script>
