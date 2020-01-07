@@ -3,7 +3,7 @@
     id="gmap"
     ref="gmap"
     :center="center"
-    :map-type-id="mapTypeId"
+    :map-type-id="['roadmap', 'hybrid', 'sattelite', 'terrain'][0]"
     map-style="green"
     :zoom="zoom"
     @bounds_changed="update($event)"
@@ -13,11 +13,11 @@
   >
     <gmap-cluster :zoom-on-click="true">
       <gmap-marker
-        v-for="(l, index) in marker"
+        v-for="(m, index) in marker"
         :key="index"
-        :position="l"
-        :title="data.find(d => d.id === l.id).t"
-        @change="selected = l.id"
+        :position="{ lat: m.l, lng: m.g }"
+        :title="m.t"
+        @click="selected = m.id"
       />
     </gmap-cluster>
   </gmap-map>
@@ -31,12 +31,15 @@ export default {
     marker: {
       type: Array,
       required: true
+    },
+    center: {
+      type: Object,
+      required: true
     }
   },
   data () {
     return {
       zoom: 15,
-      mapTypeId: ['roadmap', 'hybrid', 'sattelite', 'terrain'][0],
       clusterStyle: [
         {
           url: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png',
@@ -49,19 +52,11 @@ export default {
     }
   },
   computed: {
-    center: {
-      get () {
-        return this.selected
-      }
-    },
     ...mapGetters(['current', 'data'])
   },
   watch: {
-    center (newValue) {
-      const { id, l, g } = this.$store.state.data.find(d => d.id === newValue)
-      const location = { id, lat: parseFloat(l), lng: parseFloat(g) }
-      this.$refs.gmap.panTo(location)
-      // this.activate(id)
+    center ({ lat, lng }) {
+      this.$refs.gmap.panTo({ lat, lng })
     }
   },
   methods: {
