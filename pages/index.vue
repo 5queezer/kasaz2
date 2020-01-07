@@ -27,32 +27,6 @@ import Maps from '~/components/Maps.vue'
 import List from '~/components/List.vue'
 
 export default {
-  filters: {
-    maps (data) {
-      return data ? data.map((item) => {
-        return {
-          id: item.id,
-          lat: item.l,
-          lng: item.g
-        }
-      }) : []
-    },
-    list (data) {
-      return data ? data.map((item) => {
-        const { id, t, p, r, b, n, s, i } = item
-        return {
-          id,
-          title: t,
-          price: p,
-          bedrooms: r,
-          bathrooms: b,
-          condition: n,
-          surface: s,
-          images: i.map(i => i.imageUrl)
-        }
-      }) : []
-    }
-  },
   components: {
     Navbar,
     Maps,
