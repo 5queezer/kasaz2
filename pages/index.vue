@@ -8,7 +8,7 @@
         <b-alert show dismissible>
           <dl>
             <dt>data.length</dt><dd>{{ count }}</dd>
-            <dt>filter get</dt><dd>{{ getFilter }}</dd>
+            <dt>id</dt><dd>{{ getId }}</dd>
           </dl>
         </b-alert>
       </b-col>

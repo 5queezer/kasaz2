@@ -1,39 +1,45 @@
 <template>
-  <b-row class="h-100" @mouseenter="slide = true" @mouseleave="slide = false">
-    <b-col cols="4" class="h-100 p-2 overflow-hidden position-relative image" :style="{ 'background-image': `url(${image})` }" rel="preload">
-      <b-badge :variant="condition(item.condition)" class="sticky-top float-right">
+  <b-card class="card mr-2" :class="active ? 'shadow':''" @mouseenter="slide = true" @mouseleave="slide = false">
+    <b-card-header class="p-0 flex-grow-1 border-bottom-0 overflow-hidden position-relative image" :style="{ 'background-image': `url(${image})` }" rel="preload">
+      <b-badge v-if="item.condition" :variant="condition(item.condition)" class="sticky-top float-right mr-2 mt-2">
         {{ item.condition | condition }}
       </b-badge>
 
       <div class="position-absolute banner">
-        <p class="text-light bg-warning">
-          {{ item.title }}
-        </p>
-        <p class="">
-          <strong class="text-light ">{{ item.price | toLocale('€') }}</strong>
-          <small class="text-dark float-right">{{ item.price / item.surface | toLocale('€/m²') }}</small>
+        <div class="ml-2 mr-2">
+          <span class="text-light bg-warning title">
+            {{ item.title }}
+          </span>
+        </div>
+        <p class="mb-0 w-100">
+          <strong class="text-light price pl-2">{{ item.price | toLocale('€') }}</strong>
+          <small class="text-dark float-right mr-2 ratio">{{ item.price / item.surface | toLocale('€/m²') }}</small>
         </p>
       </div>
-    </b-col>
-    <b-col cols="8">
-      <i class="fa fa-bed" /> {{ item.bedrooms }} |
-      <i class="fa fa-bath" /> {{ item.bathrooms }} |
-      <i class="fa fa-expand" /> {{ item.surface }} m²
-    </b-col>
-  </b-row>
+    </b-card-header>
+    <b-card-footer class="h-20 d-flex justify-content-between text-secondary">
+      <span><i class="fa fa-bed" /> {{ item.bedrooms }} </span>
+      <span><i class="fa fa-bath" /> {{ item.bathrooms }} </span>
+      <span><i class="fa fa-expand" /> {{ item.surface }} m² </span>
+    </b-card-footer>
+  </b-card>
 </template>
 
 <script>
 export default {
   filters: {
     condition (label) {
-      return label.split('_').join(' ') || '?'
+      return label.split('_').join(' ')
     }
   },
   props: {
     item: {
       type: Object,
       required: true
+    },
+    active: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -80,20 +86,33 @@ export default {
 <style scoped lang="scss">
 .banner {
   bottom: 0;
+  left:0;
+  right:0;
   color: white;
 
-  *:nth-child(2) {
+  > *:nth-child(2) {
     background-color: rgba(255,255,255,0.5);
   }
 
+}
+.card {
+  > * {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
 }
 .image {
   background-size: cover;
   transition: background-image 0.2s ease-in-out;
 }
-.banner {
-  *:nth-child(1) {
-    text-shadow: 0px 0px 5px black;
-  }
+.price {
+  text-shadow: 0px 0px 5px black;
+}
+.title {
+  text-shadow: 0 0 5px black;
+}
+.ratio {
+  font-weight: bold;
 }
 </style>

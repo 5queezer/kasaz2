@@ -4,7 +4,7 @@ export const state = () => ({
   data: [],
   loading: false,
   index: undefined,
-  perPage: 4,
+  perPage: 9,
   filter: {
     'filters[sortBy]': 'relevance'
   }

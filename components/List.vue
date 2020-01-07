@@ -1,9 +1,7 @@
 <template>
-  <b-list-group v-if="count > 0">
-    <b-list-group-item v-for="item in data" :key="item.id" class="p-0 list-item flex-shrink-1">
-      <list-item :item="item" />
-    </b-list-group-item>
-  </b-list-group>
+  <b-card-group v-if="count > 0" class="list">
+    <list-item v-for="item in data" :key="item.id" class="list-item flex-shrink-1" :item="item" :active="$store.state.id == item.id" />
+  </b-card-group>
   <div v-else-if="!loading" class="d-flex align-items-start justify-content-center">
     <b-alert show variant="danger">
       No data for your current filter settings
@@ -39,9 +37,14 @@ export default {
 
 <style scoped lang="scss">
 
+.list {
+  flex-wrap: wrap;
+}
 .list-item {
-  flex-basis: 100%;
-
+  /* number of columns */
+  flex-basis: 30%;
+  height: 200px;
+  overflow: hidden;
 }
 
 </style>
