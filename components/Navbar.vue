@@ -1,9 +1,12 @@
 <template>
   <b-navbar toggleable="lg">
+    <b-navbar-brand href="#">
+      <b-nav-text>kasaz search</b-nav-text>
+      <bouncing class="d-inline" :play="loading" />
+    </b-navbar-brand>
+
     <b-navbar-nav>
-      <b-nav-item>
-        <bouncing :play="loading" />
-      </b-nav-item>
+      <b-nav-item />
     </b-navbar-nav>
     <b-navbar-nav>
       <b-nav-item>

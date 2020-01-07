@@ -72,7 +72,7 @@ export const mutations = {
   },
   setPage (state, page) {
     const startIndex = (page * state.perPage) - state.perPage
-    const offset = state.index % 10
+    const offset = (state.index || 0) % 10
     state.index = startIndex + offset
   },
   next (state) {

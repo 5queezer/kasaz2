@@ -1,18 +1,5 @@
 <template>
   <b-container id="main" fluid class="h-100vh d-flex flex-column">
-    <b-row class="mb-2 pt-5">
-      <b-col>
-        <logo />
-      </b-col>
-      <b-col v-if="debug">
-        <b-alert show dismissible>
-          <dl>
-            <dt>data.length</dt><dd>{{ count }}</dd>
-            <dt>id</dt><dd>{{ getId }}</dd>
-          </dl>
-        </b-alert>
-      </b-col>
-    </b-row>
     <b-row class="mb-2">
       <b-col>
         <navbar />
@@ -35,7 +22,6 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import Logo from '~/components/Logo.vue'
 import Navbar from '~/components/Navbar.vue'
 import Maps from '~/components/Maps.vue'
 import List from '~/components/List.vue'
@@ -68,7 +54,6 @@ export default {
     }
   },
   components: {
-    Logo,
     Navbar,
     Maps,
     List

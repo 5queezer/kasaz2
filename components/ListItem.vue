@@ -1,6 +1,6 @@
 <template>
   <b-card class="card mr-2" :class="active ? 'shadow':''" @mouseenter="slide = true" @mouseleave="slide = false">
-    <b-card-header class="p-0 flex-grow-1 border-bottom-0 overflow-hidden position-relative image" :style="{ 'background-image': `url(${image})` }" rel="preload">
+    <b-card-header class="p-0 flex-grow-1 border-bottom-0 overflow-hidden position-relative image" :style="{ 'background-image': `url(${image(index)})` }" rel="preload">
       <b-badge v-if="item.condition" :variant="condition(item.condition)" class="sticky-top float-right mr-2 mt-2">
         {{ item.condition | condition }}
       </b-badge>
@@ -20,7 +20,7 @@
     <b-card-footer class="h-20 d-flex justify-content-between text-secondary">
       <span><i class="fa fa-bed" /> {{ item.bedrooms }} </span>
       <span><i class="fa fa-bath" /> {{ item.bathrooms }} </span>
-      <span><i class="fa fa-expand" /> {{ item.surface }} m² </span>
+      <span><i class="fa fa-expand" /> {{ item.surface }}&nbsp;m² </span>
     </b-card-footer>
   </b-card>
 </template>
@@ -43,11 +43,10 @@ export default {
     }
   },
   data () {
-    return { index: 0, slide: false, interval: 1000 }
-  },
-  computed: {
-    image () {
-      return this.item.images[this.index]
+    return {
+      index: 0,
+      slide: false,
+      interval: 1000
     }
   },
   mounted () {
@@ -61,9 +60,9 @@ export default {
       }
     }, this.interval)
 
-    // preloader
-    // doesn't work for firefox
-    for (const url of this.item.images) {
+    // chrome precaching
+    for (const index in this.item.images) {
+      const url = this.item.images[index]
       const preloadLink = document.createElement('link')
       preloadLink.href = url
       preloadLink.rel = 'preload'
@@ -72,6 +71,10 @@ export default {
     }
   },
   methods: {
+    image (index) {
+      // firefox precaching
+      return this.item.images.map((url) => { const i = new Image(); i.src = url; return i.src })[index]
+    },
     condition (condition) {
       return condition === 'good_condition' ? 'success'
         : condition === 'new' ? 'primary'
@@ -109,7 +112,6 @@ export default {
 }
 .image {
   background-size: cover;
-  transition: background-image 0.2s ease-in-out;
 }
 .price {
   text-shadow: 0px 0px 5px black;

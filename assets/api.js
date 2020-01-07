@@ -11,7 +11,7 @@ function getApartments (params) {
   if (typeof params === 'undefined') {
     params = {}
   }
-  return api.get('/response.json', params)
+  return api.get(`/response.json?random=${Math.random().toString(36).substring(10)}`, params)
     .then((response) => {
       let data = response.data.markers
       if (params.filters.price.min) { data = data.filter(item => item.p >= params.filters.price.min) }
