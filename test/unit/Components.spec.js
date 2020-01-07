@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from '@vue/test-utils'
+import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
 import VueLodash from 'vue-lodash'
 import Bootstrap from 'bootstrap-vue'
 import Logo from '@/components/Logo.vue'
@@ -30,16 +30,23 @@ describe('Logo', () => {
 })
 
 describe('Navbar', () => {
+  jest.mock('@/components/Navbar.vue')
+
   const localVue = createLocalVue()
   localVue.use(VueLodash, { name: 'lodash' })
   localVue.use(Bootstrap)
   localVue.filter('toLocale', jest.fn())
 
+  const mockStore = { getters: { loading: true } }
   const options = {
-    localVue
+    localVue,
+    mocks: {
+      $store: mockStore
+    }
+
   }
   test('is a Vue instance', () => {
-    const wrapper = mount(Navbar, options)
+    const wrapper = shallowMount(Navbar, options)
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 })
