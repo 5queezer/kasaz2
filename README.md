@@ -5,7 +5,7 @@
 > Create a simple page to search for apartments. 
 
 - [kasaz coding challenge](https://github.com/kasaz/coding-challenge)
-- [codesandbox preview](https://codesandbox.io/)
+- [codesandbox preview](https://cbo9i.sse.codesandbox.io/)
 
 
 ## Build Setup
