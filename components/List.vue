@@ -1,15 +1,18 @@
 <template>
   <b-list-group v-if="count > 0">
-    <b-list-group-item v-for="item in data" :key="item.id" class="p-1">
+    <b-list-group-item v-for="item in data" :key="item.id" class="p-0 list-item flex-shrink-1">
       <b-row>
-        <b-col cols="6">
-          <!-- carousel>
-            <img v-for="(image, index) in item.images" :key="index" :src="image">
-          </carousel -->
+        <b-col cols="2" class="mh-100">
+          <img :src="item.images[0]" class="list-image">
         </b-col>
-        <b-col cols="6">
+        <b-col cols="10">
           {{ item.title }}
-          {{ item.price | toLocale('€') }}
+          <strong>{{ item.price | toLocale('€') }}</strong>
+          <i class="fa fa-bed" /> {{ item.bedrooms }}
+          <i class="fa fa-bath" /> {{ item.bathrooms }}
+          <v-text variant="warning">
+            {{ item.condition }}
+          </v-text>
         </b-col>
       </b-row>
     </b-list-group-item>
@@ -37,30 +40,21 @@ export default {
   },
   computed: {
     ...mapGetters(['loading', 'count'])
-  },
-  methods: {
-    // activate () {
-    //   const vm = this
-    //   return Object.assign({},
-    //     // We add all the listeners from the parent
-    //     this.$listeners,
-    //     // Then we can add custom listeners or override the
-    //     // behavior of some listeners. This ensures that
-    //     // the component works with v-model
-    //     {
-    //       input (event) {
-    //         vm.$emit('input', event.target.key)
-    //       }
-    //     }
-    //   )
-    // }
   }
+
 }
 </script>
 
-<style scoped>
-.slide img.w-100 {
-  height: 100px;
-  width: 200px;
+<style scoped lang="scss">
+
+.list-item {
+  flex-basis: 100%;
+
+}
+img.list-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+
 }
 </style>
