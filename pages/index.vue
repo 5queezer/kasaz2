@@ -5,10 +5,12 @@
         <logo />
       </b-col>
       <b-col v-if="debug">
-        <dl>
-          <dt>data.length</dt><dd>{{ count }}</dd>
-          <dt>filter get</dt><dd>{{ getFilter }}</dd>
-        </dl>
+        <b-alert show dismissible>
+          <dl>
+            <dt>data.length</dt><dd>{{ count }}</dd>
+            <dt>filter get</dt><dd>{{ getFilter }}</dd>
+          </dl>
+        </b-alert>
       </b-col>
     </b-row>
     <b-row class="mb-2">
@@ -51,7 +53,7 @@ export default {
     },
     list (data) {
       return data ? data.map((item) => {
-        const { id, t, p, r, b, n, i } = item
+        const { id, t, p, r, b, n, s, i } = item
         return {
           id,
           title: t,
@@ -59,6 +61,7 @@ export default {
           bedrooms: r,
           bathrooms: b,
           condition: n,
+          surface: s,
           images: i.map(i => i.imageUrl)
         }
       }) : []
