@@ -27,6 +27,7 @@ export const getters = {
     const start = (getters.page - 1) * state.perPage
     const end = start + state.perPage
     const max = state.data.length - 1
+    if (max === start) { return [start] }
     return getters.data.slice(start, end > max ? max : end)
   },
   count (state) {
