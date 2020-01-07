@@ -47,7 +47,7 @@ export default {
   mounted () {
     setInterval(() => {
       if (this.slide) {
-        if (this.index < this.item.images.length) {
+        if (this.index < this.item.images.length - 1) {
           ++this.index
         } else {
           this.index = 0
@@ -56,6 +56,7 @@ export default {
     }, this.interval)
 
     // preloader
+    // doesn't work for firefox
     for (const url of this.item.images) {
       const preloadLink = document.createElement('link')
       preloadLink.href = url
