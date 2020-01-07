@@ -2,7 +2,7 @@
   <gmap-map
     id="gmap"
     ref="gmap"
-    :center="center"
+    :center="current | maps"
     :map-type-id="mapTypeId"
     :zoom="zoom"
     @bounds_changed="update($event)"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -43,9 +43,12 @@ export default {
           textColor: '#fff'
         }
       ],
-      user: false,
-      center: { lat: 2, lng: 42 }
+      user: false
+
     }
+  },
+  computed: {
+    ...mapGetters(['current'])
   },
   methods: {
     update ($event) {
@@ -54,8 +57,9 @@ export default {
     set (id) {
 
     },
-    commit () {},
-    ...mapMutations('filters', ['set'])
+    commit () {
+
+    }
   }
 }
 </script>

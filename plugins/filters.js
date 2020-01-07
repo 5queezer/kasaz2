@@ -10,17 +10,22 @@ Vue.filter('toLocale', function (value, unit) {
 })
 
 Vue.filter('maps', (data) => {
-  return data ? data.map((item) => {
+  const scheme = (item) => {
     return {
       id: item.id,
       lat: item.l,
       lng: item.g
     }
-  }) : []
+  }
+  try {
+    return data.map(i => scheme(i))
+  } catch (e) {
+    return scheme(data)
+  }
 })
 
 Vue.filter('list', (data) => {
-  return data ? data.map((item) => {
+  const scheme = (item) => {
     const { id, t, p, r, b, n, s, i } = item
     return {
       id,
@@ -32,5 +37,10 @@ Vue.filter('list', (data) => {
       surface: s,
       images: i.map(i => i.imageUrl)
     }
-  }) : []
+  }
+  try {
+    return data.map(i => scheme(i))
+  } catch (e) {
+    return scheme(data)
+  }
 })

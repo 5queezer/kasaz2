@@ -4,10 +4,7 @@ export const state = () => ({
   data: [],
   loading: false,
   index: undefined,
-  perPage: 12,
-  filter: {
-    'filters[sortBy]': 'relevance'
-  }
+  perPage: 12
 })
 
 export const getters = {
@@ -34,12 +31,15 @@ export const getters = {
     return state.data.length
   },
   getIndex (state) {
-    return state.index
+    return state.index || 0
   },
-  getId (state) {
-    return (typeof state.index !== 'undefined' && state.data) ? state.data[state.index].id : 0
+  getId (state, getters) {
+    const i = getters.getIndex
+    return state.data[i].id
+  },
+  current (state, getters) {
+    return getters.data[getters.getIndex]
   }
-
 }
 
 export const mutations = {
@@ -71,9 +71,11 @@ export const mutations = {
     state.index = state.data.findIndex(item => item.id === id)
   },
   setPage (state, page) {
-    const startIndex = (page * state.perPage) - state.perPage
+    const startIndex = state.perPage * (page - 1)
     const offset = (state.index || 0) % 10
-    state.index = startIndex + offset
+    const max = state.data.length - 1
+    const endIndex = startIndex + offset
+    state.index = endIndex > max ? max : endIndex
   },
   next (state) {
     const index = state.index + state.perPage
