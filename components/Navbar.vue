@@ -1,18 +1,21 @@
 <template>
   <b-navbar toggleable="lg">
     <b-navbar-brand href="#">
-      <b-nav-text>kasaz search</b-nav-text>
+      <b-nav-text>
+        kasaaaz
+        <b-badge variant="success">
+          {{ count }}
+        </b-badge>
+      </b-nav-text>
       <bouncing class="d-inline" :play="loading" />
     </b-navbar-brand>
 
     <b-navbar-nav>
-      <b-nav-item />
-    </b-navbar-nav>
-    <b-navbar-nav>
-      <b-nav-item>
+      <b-nav-text>
         <search-box />
-      </b-nav-item>
+      </b-nav-text>
     </b-navbar-nav>
+
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
@@ -69,7 +72,7 @@ export default {
     bathroomRange () {
       return this.lodash.range(0, 6)
     },
-    ...mapGetters(['loading'])
+    ...mapGetters(['loading', 'count'])
   },
   methods: {
     update (setting, value) {
