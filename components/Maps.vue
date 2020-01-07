@@ -2,31 +2,33 @@
   <gmap-map
     id="gmap"
     ref="gmap"
-    :center="current | maps"
+    :center="center"
     :map-type-id="mapTypeId"
+    map-style="green"
     :zoom="zoom"
     @bounds_changed="update($event)"
     @idle="commit()"
     @dragend="user = true"
     @zoom_changed="user = true"
   >
-    <gmap-cluster>
+    <gmap-cluster :zoom-on-click="true">
       <gmap-marker
-        v-for="(l, index) in data"
+        v-for="(l, index) in marker"
         :key="index"
         :position="l"
-        @click="set(l.id)"
+        :title="data.find(d => d.id === l.id).t"
+        @change="selected = l.id"
       />
     </gmap-cluster>
   </gmap-map>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
-    data: {
+    marker: {
       type: Array,
       required: true
     }
@@ -34,7 +36,7 @@ export default {
   data () {
     return {
       zoom: 15,
-      mapTypeId: 'terrain',
+      mapTypeId: ['roadmap', 'hybrid', 'sattelite', 'terrain'][0],
       clusterStyle: [
         {
           url: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png',
@@ -43,23 +45,33 @@ export default {
           textColor: '#fff'
         }
       ],
-      user: false
-
+      selected: undefined
     }
   },
   computed: {
-    ...mapGetters(['current'])
+    center: {
+      get () {
+        return this.selected
+      }
+    },
+    ...mapGetters(['current', 'data'])
+  },
+  watch: {
+    center (newValue) {
+      const { id, l, g } = this.$store.state.data.find(d => d.id === newValue)
+      const location = { id, lat: parseFloat(l), lng: parseFloat(g) }
+      this.$refs.gmap.panTo(location)
+      // this.activate(id)
+    }
   },
   methods: {
     update ($event) {
 
     },
-    set (id) {
-
-    },
     commit () {
 
-    }
+    },
+    ...mapMutations(['activate'])
   }
 }
 </script>

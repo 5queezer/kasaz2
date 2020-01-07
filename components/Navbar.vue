@@ -2,7 +2,7 @@
   <b-navbar toggleable="md">
     <b-navbar-brand href="#">
       <b-nav-text>
-        <b-nav-title>kasaaaz</b-nav-title>
+        <b-nav-text>kasaaaz</b-nav-text>
         <sup><b-badge variant="success">
           {{ count }}
         </b-badge></sup>

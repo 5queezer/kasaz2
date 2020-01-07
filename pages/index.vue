@@ -14,7 +14,7 @@
         <b-pagination v-model="currentPage" :total-rows="count - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
-        <maps :data="data | maps" />
+        <maps :marker="data | maps" />
       </b-col>
     </b-row>
   </b-container>
