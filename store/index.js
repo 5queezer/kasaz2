@@ -4,7 +4,7 @@ export const state = () => ({
   data: [],
   loading: false,
   index: undefined,
-  perPage: 9,
+  perPage: 12,
   filter: {
     'filters[sortBy]': 'relevance'
   }
@@ -37,7 +37,7 @@ export const getters = {
     return state.index
   },
   getId (state) {
-    return state.index && state.data ? state.data[state.index].id : 0
+    return (typeof state.index !== 'undefined' && state.data) ? state.data[state.index].id : 0
   }
 
 }
