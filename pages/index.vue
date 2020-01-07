@@ -18,7 +18,7 @@
         <navbar />
       </b-col>
     </b-row>
-    <b-row v-if="count === 0" class="loading">
+    <b-row v-if="count == 0 && loading" class="loading">
       <b-spinner type="grow" label="Loading..." variant="primary" />
     </b-row>
     <b-row v-else class="mb-2 flex-fill overflow-hidden">
