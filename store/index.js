@@ -95,19 +95,11 @@ export const mutations = {
 }
 
 export const actions = {
-  fetch ({ commit }, params) {
-    return new Promise((resolve, reject) => {
-      try {
-        commit('loading', true)
-        resolve(api.getApartments(params))
-      } catch (error) {
-        reject(error)
-      }
-    })
-      .then((result) => {
-        commit('save', result)
-        commit('loading', false)
-        return result.length > 0
-      })
+  async fetch ({ commit }, params) {
+    commit('loading', true)
+    const result = await api.getApartments(params)
+    commit('save', result)
+    commit('loading', false)
+    return result.length > 0
   }
 }

@@ -2,6 +2,11 @@
   <b-navbar toggleable="lg">
     <b-navbar-nav>
       <b-nav-item>
+        <bouncing :play="loading" />
+      </b-nav-item>
+    </b-navbar-nav>
+    <b-navbar-nav>
+      <b-nav-item>
         <search-box />
       </b-nav-item>
     </b-navbar-nav>
@@ -35,16 +40,18 @@
   </b-navbar>
 </template>
 <script >
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import Range from '~/components/Range.vue'
 import Selectr from '~/components/Selectr.vue'
 import SearchBox from '~/components/Searchbox.vue'
+import Bouncing from '~/components/Bouncing.vue'
 
 export default {
   components: {
     Range,
     Selectr,
-    SearchBox
+    SearchBox,
+    Bouncing
   },
   computed: {
     surfaceRange () {
@@ -58,7 +65,8 @@ export default {
     },
     bathroomRange () {
       return this.lodash.range(0, 6)
-    }
+    },
+    ...mapGetters(['loading'])
   },
   methods: {
     update (setting, value) {

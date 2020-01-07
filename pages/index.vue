@@ -109,7 +109,7 @@ export default {
 
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'filters/set') {
-        this.fetch(this.getFilter)
+        this.fetch(state.filters)
       }
     })
   },

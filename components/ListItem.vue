@@ -101,6 +101,11 @@ export default {
     display: flex;
     flex-direction: column;
   }
+
+  &:hover {
+    box-shadow: 0 0 5px gainsboro;
+    cursor: pointer;
+  }
 }
 .image {
   background-size: cover;
