@@ -1,11 +1,11 @@
 <template>
-  <b-navbar toggleable="lg">
+  <b-navbar toggleable="md">
     <b-navbar-brand href="#">
       <b-nav-text>
-        kasaaaz
-        <b-badge variant="success">
+        <b-nav-title>kasaaaz</b-nav-title>
+        <sup><b-badge variant="success">
           {{ count }}
-        </b-badge>
+        </b-badge></sup>
       </b-nav-text>
       <bouncing class="d-inline" :play="loading" />
     </b-navbar-brand>

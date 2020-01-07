@@ -1,6 +1,6 @@
 <template>
   <b-container id="main" fluid class="h-100vh d-flex flex-column">
-    <b-row class="mb-2">
+    <b-row class="mb-2 shadow-sm mb-3">
       <b-col>
         <navbar />
       </b-col>
@@ -117,6 +117,7 @@ export default {
 #listview {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 100%
+  max-height: 100%;
+  align-content: flex-start;
 }
 </style>

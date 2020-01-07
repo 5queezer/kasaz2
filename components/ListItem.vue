@@ -1,5 +1,5 @@
 <template>
-  <b-card class="card mr-2" :class="item.id == getId ? 'shadow bg-primary text-light':''" @mouseenter="slide = true" @mouseleave="slide = false" @click="activate(item.id)">
+  <b-card class="card mr-2 mb-2" :class="item.id === getId ? 'shadow-sm bg-primary text-white active':'text-secondary'" @mouseenter="slide = true" @mouseleave="slide = false" @click="activate(item.id)">
     <b-card-header class="p-0 flex-grow-1 border-bottom-0 overflow-hidden position-relative image" :style="{ 'background-image': `url(${image(index)})` }" rel="preload">
       <b-badge v-if="item.condition" :variant="condition(item.condition)" class="sticky-top float-right mr-2 mt-2">
         {{ item.condition | condition }}
@@ -17,7 +17,7 @@
         </p>
       </div>
     </b-card-header>
-    <b-card-footer class="h-20 d-flex justify-content-between text-secondary">
+    <b-card-footer class="h-20 d-flex justify-content-between">
       <span><i class="fa fa-bed" /> {{ item.bedrooms }} </span>
       <span><i class="fa fa-bath" /> {{ item.bathrooms }} </span>
       <span><i class="fa fa-expand" /> {{ item.surface }}&nbsp;m² </span>
@@ -111,7 +111,7 @@ export default {
   }
 
   &:hover {
-    box-shadow: 0 0 5px gainsboro;
+    box-shadow: 0 0 5px grey;
     cursor: pointer;
   }
 }
@@ -127,4 +127,11 @@ export default {
 .ratio {
   font-weight: bold;
 }
+.card {
+  transition: transform .2s;
+  &.active {
+    transform: scale(0.98);
+  }
+}
+
 </style>
