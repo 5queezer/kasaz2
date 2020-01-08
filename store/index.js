@@ -3,7 +3,7 @@ import api from '@/assets/api'
 export const state = () => ({
   data: [],
   loading: false,
-  index: undefined,
+  index: null,
   perPage: 12
 })
 
@@ -31,7 +31,7 @@ export const getters = {
     return state.data.length
   },
   getIndex (state) {
-    return state.index || 0
+    return state.index
   },
   current (state, getters) {
     return getters.data[getters.getIndex] || {}
@@ -55,7 +55,7 @@ export const mutations = {
   },
   reset (state) {
     state.data = []
-    state.index = undefined
+    state.index = null
   },
   save (state, data) {
     state.data = data
@@ -64,7 +64,8 @@ export const mutations = {
     state.loading = !!value
   },
   activate (state, id) {
-    state.index = state.data.findIndex(item => item.id === id)
+    const index = state.data.findIndex(item => item.id === id)
+    state.index = index === -1 ? null : index
   },
   setPage (state, page) {
     const startIndex = state.perPage * (page - 1)
@@ -83,7 +84,7 @@ export const mutations = {
     state.index = index < 0 ? 0 : index
   },
   begin (state) {
-    state.index = state.data.length > 0 ? 0 : undefined
+    state.index = state.data.length > 0 ? 0 : null
   },
   end (state) {
     const max = state.data.length - 1

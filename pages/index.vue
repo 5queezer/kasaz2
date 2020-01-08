@@ -49,16 +49,13 @@ export default {
         this.setPage(index)
       }
     },
-    currentId: {
-      get () {
-        return this.current.id
-      },
-      set (id) {
-        this.activate(id)
-      }
-    },
     currentLocation () {
-      const location = { lat: this.current.l, lng: this.current.g }
+      let location
+      if (this.current) {
+        location = { lat: this.current.l, lng: this.current.g }
+      } else {
+        location = { lat: 42, lng: 2 }
+      }
       return location
     },
     ...mapGetters(['loading', 'paginated', 'data', 'count', 'current', 'perPage', 'currentPage', 'current']),
@@ -71,7 +68,7 @@ export default {
     this.init = false // helper var for the loading indicator
     this.$store.commit('filters/reset')
     await this.fetch(this.getFilter)
-    this.begin()
+    // this.begin()
 
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'filters/set') {
