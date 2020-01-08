@@ -82,15 +82,15 @@ describe('Filter Mutations', () => {
         bathrooms: 0
       }
     }
-    const results = []
+    const results = {}
     for (const [key, value] of traverse(params)) {
-      results.push(key + '=' + value)
+      results[key] = value
     }
-    expect(results).toEqual([
-      'filters[sortby]=relevance',
-      'filters[price][min]=0',
-      'filters[price][surface][min]=20',
-      'filters[price][surface][bathrooms]=0'
-    ])
+    expect(results).toEqual({
+      'filters[sortby]': 'relevance',
+      'filters[price][min]': 0,
+      'filters[price][surface][min]': 20,
+      'filters[price][surface][bathrooms]': 0
+    })
   })
 })
