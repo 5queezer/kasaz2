@@ -49,7 +49,7 @@ export default {
       if (this.min && this.max < this.min) {
         this.min = this.max
       }
-      this.$emit('change', { max: this.max })
+      this.$emit('change', { max: this.max || null })
     },
     selectData (str) {
       return this.values.map((value) => {
