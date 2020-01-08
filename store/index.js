@@ -34,7 +34,7 @@ export const getters = {
     return state.index || 0
   },
   current (state, getters) {
-    return getters.data[getters.getIndex]
+    return getters.data[getters.getIndex] || {}
   }
 }
 
