@@ -2,8 +2,8 @@
   <gmap-map
     id="gmap"
     ref="gmap"
-    :center="center"
     :map-type-id="['roadmap', 'hybrid', 'sattelite', 'terrain'][0]"
+    :center="centerInit"
     map-style="green"
     :zoom="zoom"
     @bounds_changed="update($event)"
@@ -17,7 +17,7 @@
         :key="index"
         :position="{ lat: m.l, lng: m.g }"
         :title="m.t"
-        @click="selected = m.id"
+        @click="centerMove({ lat: m.l, lng: m.g })"
       />
     </gmap-cluster>
   </gmap-map>
@@ -48,16 +48,19 @@ export default {
           textColor: '#fff'
         }
       ],
-      selected: undefined
+      centerInit: { lat: 0, lng: 0 }
     }
   },
   computed: {
     ...mapGetters(['current', 'data'])
   },
   watch: {
-    center ({ lat, lng }) {
-      this.$refs.gmap.panTo({ lat, lng })
+    center (newValue) {
+      this.centerMove(newValue)
     }
+  },
+  mounted () {
+    this.centerInit = this.center
   },
   methods: {
     update ($event) {
@@ -65,6 +68,9 @@ export default {
     },
     commit () {
 
+    },
+    centerMove ({ lat, lng }) {
+      this.$refs.gmap.panTo({ lat, lng })
     },
     ...mapMutations(['activate'])
   }
