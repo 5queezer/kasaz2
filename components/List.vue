@@ -27,11 +27,11 @@ export default {
     data: {
       type: Array,
       required: true
-    },
-    value: {
-      type: Number,
-      required: true
     }
+    // value: {
+    //   type: Number,
+    //   required: true
+    // }
   },
   computed: {
     ...mapGetters(['loading'])

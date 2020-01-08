@@ -28,11 +28,15 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
+    value: {
+      type: Object,
+      required: true
+    },
     marker: {
       type: Array,
       required: true
     },
-    center: {
+    centerInit: {
       type: Object,
       required: true
     }
@@ -49,7 +53,6 @@ export default {
           textColor: '#fff'
         }
       ],
-      centerInit: { lat: 0, lng: 0 },
       viewport: {
         neLat: 0,
         neLng: 0,
@@ -62,12 +65,14 @@ export default {
     ...mapGetters(['data'])
   },
   watch: {
-    center (newValue) {
-      this.centerMove(newValue)
+    value (newValue) {
+      if (newValue !== null) {
+        console.log('center moved')
+        // this.centerMove(newValue)
+      }
     }
   },
   mounted () {
-    this.centerInit = this.center
   },
   methods: {
     updateViewport (event) {

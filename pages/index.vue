@@ -10,11 +10,11 @@
     </b-row>
     <b-row v-else class="mb-2 flex-fill overflow-hidden">
       <b-col cols="6" class="h-100 d-flex flex-column">
-        <list id="listview" v-model="currentId" :data="paginated | list" class="flex-grow-1" />
+        <list id="listview" :data="paginated | list" class="flex-grow-1" />
         <b-pagination v-model="currentPage" :total-rows="count - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
-        <maps :center="currentPosition" :marker="data" />
+        <maps :value="currentPosition" :center-init="{ lat: 41.4, lng: 2.2 }" :marker="data" @input="actualLocation = $event.target.value" />
       </b-col>
     </b-row>
   </b-container>
@@ -34,8 +34,7 @@ export default {
   },
   data () {
     return {
-      init: true,
-      oldPosition: () => { return { lat: 0, lng: 0 } }
+      init: true
     }
   },
   computed: {
@@ -59,10 +58,13 @@ export default {
       }
     },
     currentPosition () {
-      return this.current ? { lat: this.current.l, lng: this.current.g } : null
+      return { lat: this.current.l, lng: this.current.g }
     },
     ...mapGetters(['loading', 'paginated', 'data', 'count', 'current', 'perPage', 'currentPage', 'current']),
     ...mapGetters('filters', { getFilter: 'get' })
+  },
+  watch: {
+
   },
   async mounted () {
     this.init = false // helper var for the loading indicator
