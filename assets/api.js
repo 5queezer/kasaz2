@@ -17,7 +17,7 @@ function getApartments (params) {
   } else {
     url = 'https://www.kasaz.com/api/v1/search/update_map_results'
   }
-  return api.get(url, params)
+  return api.get(url, { params })
     .then((response) => {
       let data = response.data.markers
       if (process.env.NODE_ENV === 'development') {
