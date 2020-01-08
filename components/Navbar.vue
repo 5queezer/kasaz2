@@ -84,7 +84,7 @@ export default {
         if (max) {
           this.set({ key: `filters[${setting}][max]`, value: max || null })
         }
-      } else if (value) {
+      } else {
         this.set({ key: `filters[${setting}]`, value: value || null })
       }
     },
