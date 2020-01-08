@@ -1,6 +1,18 @@
 <template>
-  <b-card class="card mr-2 mb-2" :class="item.id === getId ? 'shadow-sm bg-primary text-white active':'text-secondary'" @mouseenter="slide = true" @mouseleave="slide = false" @click="activate(item.id)">
-    <b-card-header class="p-0 flex-grow-1 border-bottom-0 overflow-hidden position-relative image" :style="{ 'background-image': `url(${image(index)})` }" rel="preload">
+  <b-card class="card mr-2 mb-2" :class="item.id === getId ? 'shadow-sm bg-primary text-white active':'text-secondary'" @mouseenter="start()" @mouseleave="stop()" @click="activate(item.id)">
+    <b-card-header class="p-0 flex-grow-1 border-bottom-0 overflow-hidden position-relative image" :style="{ 'background-image': `url(${preload(index)})` }" rel="preload">
+      <b-form-group class="p-0 m-2 position-absolute">
+        <b-form-radio
+          v-for="(i,j) in item.images"
+          :key="j"
+          v-model="index"
+          class="d-inline"
+          name="slider-item"
+          :value="j"
+          :disabled="true"
+        />
+      </b-form-group>
+
       <b-badge v-if="item.condition" :variant="condition(item.condition)" class="sticky-top float-right mr-2 mt-2">
         {{ item.condition | condition }}
       </b-badge>
@@ -47,23 +59,17 @@ export default {
     return {
       index: 0,
       slide: false,
-      interval: 1000
+      interval: 1000,
+      intervalHandler: null
     }
   },
   computed: {
+    options () {
+      return this.item.images.map((_, index) => { return { value: index, text: '' } })
+    },
     ...mapGetters(['getId'])
   },
   mounted () {
-    setInterval(() => {
-      if (this.slide) {
-        if (this.index < this.item.images.length - 1) {
-          ++this.index
-        } else {
-          this.index = 0
-        }
-      }
-    }, this.interval)
-
     // chrome precaching
     for (const index in this.item.images) {
       const url = this.item.images[index]
@@ -75,8 +81,9 @@ export default {
     }
   },
   methods: {
-    image (index) {
+    preload (index) {
       // firefox precaching
+      // TODO single caching for all browsers
       return this.item.images.map((url) => { const i = new Image(); i.src = url; return i.src })[index]
     },
     condition (condition) {
@@ -85,6 +92,20 @@ export default {
           : condition === 'remodeled' ? 'danger'
             : condition === 'to_remodel' ? 'warning'
               : 'light'
+    },
+    start () {
+      this.intervalHandler = setInterval(() => {
+        if (this.index < this.item.images.length - 1) {
+          ++this.index
+        } else {
+          this.index = 0
+        }
+      }, this.interval)
+    },
+    stop () {
+      clearInterval(this.intervalHandler)
+      this.intervalHandler = null
+      this.index = 0
     },
     ...mapMutations(['activate'])
   }
