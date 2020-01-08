@@ -35,7 +35,7 @@ export const getters = {
   },
   getId (state, getters) {
     const i = getters.getIndex
-    return state.data[i].id
+    return state.data[i] ? state.data[i].id : undefined
   },
   current (state, getters) {
     return getters.data[getters.getIndex]

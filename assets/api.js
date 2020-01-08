@@ -27,6 +27,12 @@ function getApartments (params) {
         if (params.filters.surface.max) { data = data.filter(item => item.s <= params.filters.surface.max) }
         if (params.filters.bedrooms) { data = data.filter(item => item.r === params.filters.bedrooms) }
         if (params.filters.bathrooms) { data = data.filter(item => item.b === params.filters.bathrooms) }
+        if (params.viewport.neLat && params.viewport.swLat && params.viewport.neLng && params.viewport.swLng) {
+          data = data.filter((item) => {
+            return item.l < params.viewport.neLat && item.l > params.viewport.swLat &&
+            item.g < params.viewport.neLng && item.g > params.viewport.swLng
+          })
+        }
       }
       return data
     })

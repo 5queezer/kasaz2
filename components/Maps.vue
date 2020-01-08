@@ -6,8 +6,8 @@
     :center="centerInit"
     map-style="green"
     :zoom="zoom"
-    @bounds_changed="update($event)"
-    @idle="commit()"
+    @bounds_changed="updateViewport($event)"
+    @idle="commitViewport()"
     @dragend="user = true"
     @zoom_changed="user = true"
   >
@@ -39,6 +39,7 @@ export default {
   },
   data () {
     return {
+      user: false,
       zoom: 15,
       clusterStyle: [
         {
@@ -48,11 +49,17 @@ export default {
           textColor: '#fff'
         }
       ],
-      centerInit: { lat: 0, lng: 0 }
+      centerInit: { lat: 0, lng: 0 },
+      viewport: {
+        neLat: 0,
+        neLng: 0,
+        swLat: 0,
+        swLng: 0
+      }
     }
   },
   computed: {
-    ...mapGetters(['current', 'data'])
+    ...mapGetters(['data'])
   },
   watch: {
     center (newValue) {
@@ -63,16 +70,25 @@ export default {
     this.centerInit = this.center
   },
   methods: {
-    update ($event) {
-
+    updateViewport (event) {
+      if (!event) { return }
+      const { ka, pa } = event
+      this.viewport.neLat = pa.h
+      this.viewport.neLng = ka.h
+      this.viewport.swLat = pa.g
+      this.viewport.swLng = ka.g
     },
-    commit () {
-
+    commitViewport () {
+      if (this.user) {
+        this.set({ viewport: this.viewport })
+        this.user = false
+      }
     },
     centerMove ({ lat, lng }) {
       this.$refs.gmap.panTo({ lat, lng })
     },
-    ...mapMutations(['activate'])
+    ...mapMutations(['activate']),
+    ...mapMutations('filters', ['set'])
   }
 }
 </script>
