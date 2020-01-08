@@ -1,18 +1,3 @@
-export function* traverse (object, stack = []) {
-  for (const key in object) {
-    stack.push(key)
-    if (typeof object[key] === 'object') {
-      yield * traverse(object[key], stack)
-    } else {
-      // yield key - value pair
-      const keyString = stack[0] + stack.slice(1).map(s => `[${s}]`).join('')
-      const value = object[key]
-      if (value !== undefined) { yield [keyString, value] }
-      stack.pop()
-    }
-  }
-}
-
 export const state = () => ({
   // init state with reset first
   // filters: {},

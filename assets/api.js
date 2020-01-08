@@ -12,12 +12,18 @@ function getApartments (params) {
   if (typeof params === 'undefined') {
     params = {}
   }
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development -') {
     url = `/response.json?random=${Math.random().toString(36).substring(7)}`
   } else {
     url = 'https://www.kasaz.com/api/v1/search/update_map_results'
   }
-  return api.get(url, { params })
+
+  const paramsApi = {}
+  for (const [key, value] of traverse(params)) {
+    paramsApi[key] = value
+  }
+
+  return api.get(url, { params: paramsApi })
     .then((response) => {
       let data = response.data.markers
       if (process.env.NODE_ENV === 'development') {
@@ -40,4 +46,19 @@ function getApartments (params) {
 
 export default {
   getApartments
+}
+
+export function* traverse (object, stack = []) {
+  for (const key in object) {
+    stack.push(key)
+    if (typeof object[key] === 'object') {
+      yield * traverse(object[key], stack)
+    } else {
+      // yield key - value pair
+      const keyString = stack[0] + stack.slice(1).map(s => `[${s}]`).join('')
+      const value = object[key]
+      if (value !== undefined) { yield [keyString, value] }
+      stack.pop()
+    }
+  }
 }

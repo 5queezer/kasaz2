@@ -1,4 +1,5 @@
-import { mutations, state, traverse } from '@/store/filters'
+import { mutations, state } from '@/store/filters'
+import { traverse } from '@/assets/api'
 
 describe('Filter Mutations', () => {
   beforeEach(() => {
