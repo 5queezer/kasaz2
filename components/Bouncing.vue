@@ -17,7 +17,7 @@ export default {
 <style scoped>
 .animated {
   animation: bounce 1.5s infinite ease-in-out;
-  animation-delay: 1s;
+  /* animation-delay: 1s;  */
 }
 @keyframes bounce {
   0% {
