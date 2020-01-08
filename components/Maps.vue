@@ -63,7 +63,7 @@ export default {
   },
   watch: {
     center (newValue) {
-      this.centerMove(newValue)
+      // this.centerMove(newValue)
     }
   },
   mounted () {

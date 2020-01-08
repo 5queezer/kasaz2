@@ -1,4 +1,4 @@
-import { mutations, state } from '@/store/filters'
+import { mutations, state, traverse } from '@/store/filters'
 
 describe('Filter Mutations', () => {
   beforeEach(() => {
@@ -70,5 +70,26 @@ describe('Filter Mutations', () => {
 
     expect(state.filters.price).not.toHaveProperty('max')
     expect(state.filters).not.toHaveProperty('bedrooms')
+  })
+
+  it('flatten an object structure', () => {
+    const params = {
+      filters: {
+        sortby: 'relevance',
+        price: { min: 0 },
+        surface: { min: 20, max: undefined },
+        bathrooms: 0
+      }
+    }
+    const results = []
+    for (const [key, value] of traverse(params)) {
+      results.push(key + '=' + value)
+    }
+    expect(results).toEqual([
+      'filters[sortby]=relevance',
+      'filters[price][min]=0',
+      'filters[price][surface][min]=20',
+      'filters[price][surface][bathrooms]=0'
+    ])
   })
 })

@@ -1,5 +1,5 @@
 <template>
-  <b-card-group v-if="count > 0" class="list">
+  <b-card-group v-if="data.length > 0" class="list">
     <list-item v-for="item in data" :key="item.id" class="list-item flex-shrink-1" :item="item" :active="$store.state.id == item.id" />
   </b-card-group>
   <div v-else-if="!loading" class="d-flex align-items-start justify-content-center">
@@ -34,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['loading', 'count'])
+    ...mapGetters(['loading'])
   }
 
 }
