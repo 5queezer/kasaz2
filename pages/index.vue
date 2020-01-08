@@ -14,7 +14,7 @@
         <b-pagination v-model="currentPage" :total-rows="count - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
-        <maps :center="currentLocation" :marker="data" @viewport_changed="setViewport($event)" />
+        <maps :center="currentLocation" :marker="data" @viewport_changed="setFilter($event)" />
       </b-col>
     </b-row>
   </b-container>
@@ -49,14 +49,6 @@ export default {
         this.setPage(index)
       }
     },
-    currentId: {
-      get () {
-        return this.current.id
-      },
-      set (id) {
-        this.activate(id)
-      }
-    },
     currentLocation () {
       const location = { lat: this.current.l, lng: this.current.g }
       return location
@@ -80,7 +72,7 @@ export default {
     })
   },
   methods: {
-    setViewport (viewport) {
+    setFilter (viewport) {
       this.set({ viewport })
     },
     ...mapActions(['fetch']),
