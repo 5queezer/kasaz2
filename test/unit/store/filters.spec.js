@@ -80,6 +80,13 @@ describe('Filter Mutations', () => {
         price: { min: 0 },
         surface: { min: 20, max: undefined },
         bathrooms: 0
+      },
+      locale: 'es',
+      viewport: {
+        neLat: 0,
+        neLng: 1,
+        swLat: 2,
+        swLng: 3
       }
     }
     const results = {}
@@ -89,8 +96,13 @@ describe('Filter Mutations', () => {
     expect(results).toEqual({
       'filters[sortby]': 'relevance',
       'filters[price][min]': 0,
-      'filters[price][surface][min]': 20,
-      'filters[price][surface][bathrooms]': 0
+      'filters[surface][min]': 20,
+      'filters[bathrooms]': 0,
+      locale: 'es',
+      'viewport[neLat]': 0,
+      'viewport[neLng]': 1,
+      'viewport[swLat]': 2,
+      'viewport[swLng]': 3
     })
   })
 })
