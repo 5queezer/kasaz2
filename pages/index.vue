@@ -14,7 +14,7 @@
         <b-pagination v-model="currentPage" :total-rows="count - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
-        <maps :value="currentPosition" :center-init="{ lat: 41.4, lng: 2.2 }" :marker="data" @input="actualLocation = $event.target.value" />
+        <maps :center="currentLocation" :marker="data" @viewport_changed="setViewport($event)" />
       </b-col>
     </b-row>
   </b-container>
@@ -57,8 +57,9 @@ export default {
         this.activate(id)
       }
     },
-    currentPosition () {
-      return { lat: this.current.l, lng: this.current.g }
+    currentLocation () {
+      const location = { lat: this.current.l, lng: this.current.g }
+      return location
     },
     ...mapGetters(['loading', 'paginated', 'data', 'count', 'current', 'perPage', 'currentPage', 'current']),
     ...mapGetters('filters', { getFilter: 'get' })
@@ -79,8 +80,12 @@ export default {
     })
   },
   methods: {
+    setViewport (viewport) {
+      this.set({ viewport })
+    },
     ...mapActions(['fetch']),
-    ...mapMutations(['activate', 'setPage', 'begin'])
+    ...mapMutations(['activate', 'setPage', 'begin']),
+    ...mapMutations('filters', ['set'])
   }
 }
 </script>

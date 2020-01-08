@@ -1,5 +1,6 @@
 <template>
   <gmap-map
+    v-cloak
     id="gmap"
     ref="gmap"
     :map-type-id="['roadmap', 'hybrid', 'sattelite', 'terrain'][0]"
@@ -24,19 +25,14 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
-    value: {
-      type: Object,
-      required: true
-    },
     marker: {
       type: Array,
       required: true
     },
-    centerInit: {
+    center: {
       type: Object,
       required: true
     }
@@ -58,23 +54,30 @@ export default {
         neLng: 0,
         swLat: 0,
         swLng: 0
-      }
+      },
+      current: null,
+      centerInit: {},
+      loading: true
     }
   },
-  computed: {
-    ...mapGetters(['data'])
-  },
   watch: {
-    value (newValue) {
-      if (newValue !== null) {
-        console.log('center moved')
-        // this.centerMove(newValue)
+    center (newValue, oldValue) {
+      if (typeof newValue.lng === 'number' && typeof newValue.lat === 'number' && !this.deepEqual(newValue, oldValue)) {
+        this.current = newValue
+        this.centerMove()
       }
     }
   },
   mounted () {
+    this.centerInit = this.center
+    this.$refs.gmap.$mapPromise.then(() => {
+      this.loading = false
+    })
   },
   methods: {
+    deepEqual (a, b) {
+      return JSON.stringify(a) === JSON.stringify(b)
+    },
     updateViewport (event) {
       if (!event) { return }
       const { ka, pa } = event
@@ -85,15 +88,13 @@ export default {
     },
     commitViewport () {
       if (this.user) {
-        this.set({ viewport: this.viewport })
+        this.$emit('viewport_changed', this.viewport)
         this.user = false
       }
     },
-    centerMove ({ lat, lng }) {
+    centerMove ({ lat, lng } = this.current) {
       this.$refs.gmap.panTo({ lat, lng })
-    },
-    ...mapMutations(['activate']),
-    ...mapMutations('filters', ['set'])
+    }
   }
 }
 </script>
