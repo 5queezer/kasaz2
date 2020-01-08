@@ -40,7 +40,7 @@ export default {
   data () {
     return {
       user: false,
-      zoom: 15,
+      zoom: 12,
       clusterStyle: [
         {
           url: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png',
