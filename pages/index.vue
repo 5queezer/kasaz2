@@ -34,7 +34,8 @@ export default {
   },
   data () {
     return {
-      init: true
+      init: true,
+      oldPosition: () => { return { lat: 0, lng: 0 } }
     }
   },
   computed: {
@@ -43,7 +44,7 @@ export default {
     },
     currentPage: {
       get () {
-        return this.page
+        return this.currentPage
       },
       set (index) {
         this.setPage(index)
@@ -51,20 +52,20 @@ export default {
     },
     currentId: {
       get () {
-        return this.getId
+        return this.current.id
       },
       set (id) {
         this.activate(id)
       }
     },
     currentPosition () {
-      return this.current ? { lat: this.current.l, lng: this.current.g } : { lat: 0, lng: 0 }
+      return this.current ? { lat: this.current.l, lng: this.current.g } : null
     },
-    ...mapGetters(['loading', 'paginated', 'data', 'count', 'getIndex', 'getId', 'perPage', 'page', 'current']),
+    ...mapGetters(['loading', 'paginated', 'data', 'count', 'current', 'perPage', 'currentPage', 'current']),
     ...mapGetters('filters', { getFilter: 'get' })
   },
   async mounted () {
-    this.init = false
+    this.init = false // helper var for the loading indicator
     this.$store.commit('filters/reset')
     await this.fetch(this.getFilter)
     this.begin()

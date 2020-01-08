@@ -22,7 +22,6 @@ function getApartments (params) {
   for (const [key, value] of traverse(params)) {
     filters[key] = value
   }
-  console.log(filters)
 
   return api.get(url, { params: filters })
     .then((response) => {
@@ -36,8 +35,8 @@ function getApartments (params) {
         if (params.filters.bathrooms) { data = data.filter(item => item.b === params.filters.bathrooms) }
         if (params.viewport.neLat && params.viewport.swLat && params.viewport.neLng && params.viewport.swLng) {
           data = data.filter((item) => {
-            return item.l < params.viewport.neLat && item.l > params.viewport.swLat &&
-            item.g < params.viewport.neLng && item.g > params.viewport.swLng
+            return item.l > params.viewport.swLat && item.l < params.viewport.neLat &&
+                   item.g > params.viewport.swLng && item.g < params.viewport.neLng
           })
         }
       }

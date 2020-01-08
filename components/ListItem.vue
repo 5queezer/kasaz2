@@ -1,5 +1,5 @@
 <template>
-  <b-card class="card mr-2 mb-2" :class="item.id === getId ? 'shadow-sm bg-primary text-white active':'text-secondary'" @mouseenter="start()" @mouseleave="stop()" @click="activate(item.id)">
+  <b-card class="card mr-2 mb-2" :class="item.id === current.id ? 'shadow-sm bg-primary text-white active':'text-secondary'" @mouseenter="start()" @mouseleave="stop()" @click="activate(item.id)">
     <b-card-header class="p-0 flex-grow-1 border-bottom-0 overflow-hidden position-relative image" :style="{ 'background-image': `url(${preload(index)})` }" rel="preload">
       <b-form-group class="p-0 m-2 position-absolute">
         <b-form-radio
@@ -67,7 +67,7 @@ export default {
     options () {
       return this.item.images.map((_, index) => { return { value: index, text: '' } })
     },
-    ...mapGetters(['getId'])
+    ...mapGetters(['current'])
   },
   mounted () {
     // chrome precaching

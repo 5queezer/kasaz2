@@ -14,14 +14,14 @@ export const getters = {
   loading (state) {
     return state.loading
   },
-  page (state) {
+  currentPage (state) {
     return state.index ? parseInt(state.index / state.perPage) + 1 : 1
   },
   perPage (state) {
     return state.perPage
   },
   paginated (state, getters) {
-    const start = (getters.page - 1) * state.perPage
+    const start = (getters.currentPage - 1) * state.perPage
     const end = start + state.perPage
     const max = state.data.length - 1
     if (max === start) { return [start] }
@@ -32,10 +32,6 @@ export const getters = {
   },
   getIndex (state) {
     return state.index || 0
-  },
-  getId (state, getters) {
-    const i = getters.getIndex
-    return state.data[i] ? state.data[i].id : undefined
   },
   current (state, getters) {
     return getters.data[getters.getIndex]
