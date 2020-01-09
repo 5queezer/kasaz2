@@ -58,6 +58,11 @@ export default {
     this.$store.commit('filters/reset')
     await this.fetch(this.getFilter)
 
+    // calculate midpoint of all values
+    const lat = this.data.map(d => d.l).reduce((accumulator, value) => (accumulator + value), 0) / this.data.length
+    const lng = this.data.map(d => d.g).reduce((accumulator, value) => (accumulator + value), 0) / this.data.length
+    this.center({ lat, lng })
+
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'filters/set') {
         this.fetch(state.filters)
