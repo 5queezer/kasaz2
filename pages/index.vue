@@ -5,11 +5,14 @@
         <navbar />
       </b-col>
     </b-row>
-    <b-row v-if="init || (empty && loading)" class="loading">
+    <b-row v-if="init" class="loading">
       <b-spinner type="grow" label="Loading..." variant="primary" />
     </b-row>
     <b-row v-else class="mb-2 flex-fill overflow-hidden">
-      <b-col cols="6" class="h-100 d-flex flex-column">
+      <b-col v-if="empty && loading" class="loading">
+        <b-spinner type="grow" label="Loading..." variant="primary" />
+      </b-col>
+      <b-col v-else cols="6" class="h-100 d-flex flex-column">
         <list id="listview" :data="paginated | list" class="flex-grow-1" />
         <b-pagination v-model="page" :total-rows="data.length - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
@@ -54,9 +57,9 @@ export default {
 
   },
   async mounted () {
-    this.init = false // helper var for the loading indicator
     this.$store.commit('filters/reset')
     await this.fetch(this.getFilter)
+    this.init = false // helper var for the loading indicator
 
     // calculate midpoint of all values
     const lat = this.data.map(d => d.l).reduce((accumulator, value) => (accumulator + value), 0) / this.data.length
@@ -91,6 +94,7 @@ export default {
   height: 100vh;
 }
 .loading {
+  display: flex;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
