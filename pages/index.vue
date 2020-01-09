@@ -50,6 +50,11 @@ export default {
         this.setPage(index)
       }
     },
+    midpoint () {
+      const lat = this.data.map(d => d.l).reduce((accumulator, value) => (accumulator + value), 0) / this.data.length
+      const lng = this.data.map(d => d.g).reduce((accumulator, value) => (accumulator + value), 0) / this.data.length
+      return { lat, lng }
+    },
     ...mapGetters(['loading', 'data', 'empty', 'paginated', 'current', 'paginated', 'perPage', 'currentPage']),
     ...mapGetters('filters', { getFilter: 'get' })
   },
@@ -62,13 +67,12 @@ export default {
     this.init = false // helper var for the loading indicator
 
     // calculate midpoint of all values
-    const lat = this.data.map(d => d.l).reduce((accumulator, value) => (accumulator + value), 0) / this.data.length
-    const lng = this.data.map(d => d.g).reduce((accumulator, value) => (accumulator + value), 0) / this.data.length
-    this.center({ lat, lng })
+    this.center(this.midpoint)
 
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'filters/set') {
         this.fetch(state.filters)
+        if (state.filters.location) { this.center(this.midpoint) }
       }
       if (mutation.type === 'activate') {
         this.center()
