@@ -1,7 +1,6 @@
 import { setup } from 'axios-cache-adapter'
 
 const api = setup({
-  // baseURL: 'http://localhost:43287/',
   cache: {
     maxAge: 15 * 60 * 1000
   }
