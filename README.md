@@ -42,7 +42,7 @@ cp env_sample .env
 nano .env
 ```
 
-Enter your Google Maps api key and save the file.
+Enter your Google Maps api key and save the file. It's necessary to restart the Sandbox if you use codesandbox.io.
 
 ## Data Source
 
