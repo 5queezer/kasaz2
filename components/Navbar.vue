@@ -5,7 +5,7 @@
       <b-nav-text>
         <b-nav-text>kasaaaz</b-nav-text>
         <sup><b-badge variant="success">
-          {{ count }}
+          {{ data.length }}
         </b-badge></sup>
       </b-nav-text>
     </b-navbar-brand>
@@ -72,7 +72,7 @@ export default {
     bathroomRange () {
       return this.lodash.range(0, 6)
     },
-    ...mapGetters(['loading', 'count'])
+    ...mapGetters(['loading', 'data'])
   },
   methods: {
     update (setting, value) {
