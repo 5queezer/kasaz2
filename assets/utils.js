@@ -32,18 +32,18 @@ export function mergeDeep (target, ...sources) {
 
 /**
  * Traverse an object.
- * @param object
+ * @param source
  * @yields [key, value]
  */
-export function* traverse (object, stack = []) {
-  for (const key in object) {
+export function* traverse (source, stack = []) {
+  for (const key in source) {
     stack.push(key)
-    if (typeof object[key] === 'object') {
-      yield * traverse(object[key], stack)
+    if (isObject(source[key])) {
+      yield * traverse(source[key], stack)
     } else {
       // yield key - value pair
       const keyString = stack[0] + stack.slice(1).map(s => `[${s}]`).join('')
-      const value = object[key]
+      const value = source[key]
       if (value !== undefined) { yield [keyString, value] }
       stack.pop()
     }
