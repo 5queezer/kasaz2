@@ -2,8 +2,8 @@
 
 exports[`Filter Mutations can reset the filter to standard values 1`] = `
 Object {
-  "bathrooms": undefined,
-  "bedrooms": undefined,
+  "bathrooms": null,
+  "bedrooms": null,
   "lodgingType": Object {
     "attic": true,
     "duplex": true,
@@ -14,24 +14,24 @@ Object {
     "studio": true,
   },
   "price": Object {
-    "max": undefined,
-    "min": undefined,
+    "max": null,
+    "min": null,
   },
   "showHiddenListings": false,
   "sortby": "relevance",
   "surface": Object {
-    "max": undefined,
-    "min": undefined,
+    "max": null,
+    "min": null,
   },
 }
 `;
 
 exports[`Filter Mutations can reset the filter to standard values 2`] = `
 Object {
-  "neLat": undefined,
-  "neLng": undefined,
-  "swLat": undefined,
-  "swLng": undefined,
+  "neLat": null,
+  "neLng": null,
+  "swLat": null,
+  "swLng": null,
 }
 `;
 

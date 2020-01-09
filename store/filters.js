@@ -15,7 +15,7 @@ export const getters = {
 }
 export const mutations = {
   set (state, param) {
-    if (param.key && typeof param.value !== 'undefined') {
+    if (param.key && param.vale !== null) {
       // key as string of object structure
       // e.g. filters[price][max]
       const value = param.value
@@ -60,23 +60,23 @@ export const mutations = {
         showHiddenListings: false,
         sortby: 'relevance',
         price: {
-          min: undefined,
-          max: undefined
+          min: null,
+          max: null
         },
         surface: {
-          min: undefined,
-          max: undefined
+          min: null,
+          max: null
         },
-        bedrooms: undefined,
-        bathrooms: undefined
+        bedrooms: null,
+        bathrooms: null
       },
       locale: 'es',
       location: { city: 'Barcelona' },
       viewport: {
-        neLat: undefined,
-        neLng: undefined,
-        swLat: undefined,
-        swLng: undefined
+        neLat: null,
+        neLng: null,
+        swLat: null,
+        swLng: null
       }
     }
     Object.freeze(init)
