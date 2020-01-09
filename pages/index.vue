@@ -34,7 +34,8 @@ export default {
   },
   data () {
     return {
-      init: true
+      init: true,
+      currentLocation: { lat: 0, lng: 0 }
     }
   },
   computed: {
@@ -46,15 +47,6 @@ export default {
         this.setPage(index)
       }
     },
-    currentLocation () {
-      let location
-      if (this.current) {
-        location = { lat: this.current.l, lng: this.current.g }
-      } else {
-        location = { lat: 42, lng: 2 }
-      }
-      return location
-    },
     ...mapGetters(['loading', 'data', 'empty', 'paginated', 'current', 'paginated', 'perPage', 'currentPage']),
     ...mapGetters('filters', { getFilter: 'get' })
   },
@@ -65,20 +57,25 @@ export default {
     this.init = false // helper var for the loading indicator
     this.$store.commit('filters/reset')
     await this.fetch(this.getFilter)
-    // this.begin()
 
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === 'filters/set') {
         this.fetch(state.filters)
       }
+      if (mutation.type === 'activate') {
+        this.center()
+      }
     })
   },
   methods: {
+    center (position = { lat: this.current.l, lng: this.current.g }) {
+      this.currentLocation = position
+    },
     setFilter (viewport) {
       this.set({ viewport })
     },
     ...mapActions(['fetch']),
-    ...mapMutations(['activate', 'setPage', 'begin']),
+    ...mapMutations(['setPage']),
     ...mapMutations('filters', ['set'])
   }
 }
