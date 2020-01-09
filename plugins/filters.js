@@ -18,7 +18,7 @@ Vue.filter('maps', (data) => {
     }
   }
   try {
-    return data.map(i => scheme(i))
+    return data ? data.map(i => scheme(i)) : {}
   } catch (e) {
     return scheme(data)
   }
@@ -39,7 +39,7 @@ Vue.filter('list', (data) => {
     }
   }
   try {
-    return data.map(i => scheme(i))
+    return data ? data.map(i => scheme(i)) : {}
   } catch (e) {
     return scheme(data)
   }
