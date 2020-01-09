@@ -1,6 +1,3 @@
-<style>
-img { float: left; }
-</style>
 ![Logo Title](/assets/green-home-icon-64-177826.png?raw=true "Logo")
 
 # kasaz map viewer
