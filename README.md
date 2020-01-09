@@ -48,3 +48,4 @@ Enter your Google Maps api key and save the file.
 
 Depending on your **NODE_ENV** environment variable, the data for _development_ comes from the file `/static/response.json`, and in any other case it will fetch the API endpoint `https://www.kasaz.com/api/v1/search/update_map_results`.
 
+In _development_ mode the dataset contains data from Barcelona only.
