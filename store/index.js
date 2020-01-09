@@ -30,11 +30,8 @@ export const getters = {
   empty (state) {
     return state.data.length === 0
   },
-  getIndex (state) {
-    return state.index || 0
-  },
   current (state, getters) {
-    return getters.data[getters.getIndex] || {}
+    return getters.data[state.index] || {}
   }
 }
 

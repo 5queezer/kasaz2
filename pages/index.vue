@@ -35,7 +35,7 @@ export default {
   data () {
     return {
       init: true,
-      currentLocation: {}
+      currentLocation: { lat: 0, lng: 0 }
     }
   },
   computed: {
@@ -75,7 +75,7 @@ export default {
       this.set({ viewport })
     },
     ...mapActions(['fetch']),
-    ...mapMutations(['activate', 'setPage']),
+    ...mapMutations(['setPage']),
     ...mapMutations('filters', ['set'])
   }
 }
