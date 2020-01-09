@@ -40,7 +40,6 @@ export default {
         swLng: event.geometry.viewport.ka.g
       }
       const filters = { location: event.formatted_address }
-      console.log({ viewport, location, filters })
       this.filters = { viewport, location, filters }
     },
     commit () {

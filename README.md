@@ -14,9 +14,11 @@
 $ yarn install
 
 # serve with hot reload at localhost:3000
+# NODE_ENV=development
 $ yarn dev
 
 # build for production and launch server
+# NODE_ENV=production
 $ yarn build
 $ yarn start
 
@@ -40,3 +42,8 @@ nano .env
 ```
 
 Enter your Google Maps api key and save the file.
+
+## Data Source
+
+Depending on your **NODE_ENV** environment variable, the data for _development_ comes from the file `/static/response.json`, and in any other case it will fetch the API endpoint `https://www.kasaz.com/api/v1/search/update_map_results`.
+
