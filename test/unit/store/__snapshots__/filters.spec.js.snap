@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter Mutations can reset the filter to standard values 1`] = `
+Object {
+  "bathrooms": undefined,
+  "bedrooms": undefined,
+  "lodgingType": Object {
+    "attic": true,
+    "duplex": true,
+    "flat": true,
+    "ground_floor": true,
+    "house": true,
+    "loft": true,
+    "studio": true,
+  },
+  "price": Object {
+    "max": undefined,
+    "min": undefined,
+  },
+  "showHiddenListings": false,
+  "sortby": "relevance",
+  "surface": Object {
+    "max": undefined,
+    "min": undefined,
+  },
+}
+`;
+
+exports[`Filter Mutations can reset the filter to standard values 2`] = `
+Object {
+  "neLat": undefined,
+  "neLng": undefined,
+  "swLat": undefined,
+  "swLng": undefined,
+}
+`;
+
+exports[`Filter Mutations can reset the filter to standard values 3`] = `
+Object {
+  "city": "Barcelona",
+}
+`;
+
+exports[`Filter Mutations can reset the filter to standard values 4`] = `"es"`;

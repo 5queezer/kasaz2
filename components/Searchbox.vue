@@ -1,6 +1,6 @@
 <template>
   <b-input-group>
-    <gmap-autocomplete class="form-control" @place_changed="update();commit()">
+    <gmap-autocomplete class="form-control" @place_changed="update($event);commit()">
       <template v-slot:input="slotProps">
         <b-form-input
           ref="input"
@@ -40,6 +40,7 @@ export default {
         swLng: event.geometry.viewport.ka.g
       }
       const filters = { location: event.formatted_address }
+      console.log({ viewport, location, filters })
       this.filters = { viewport, location, filters }
     },
     commit () {

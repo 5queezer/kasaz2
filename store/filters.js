@@ -1,3 +1,6 @@
+import deepCleaner from 'deep-cleaner'
+import { mergeDeep } from '@/assets/utils'
+
 export const state = () => ({
   // init state with reset first
   // filters: {},
@@ -20,6 +23,9 @@ export const mutations = {
       const last = command.pop()
       let key = state
       command.forEach((attribute) => {
+        if (!key[attribute]) {
+          key.attribute = {}
+        }
         key = key[attribute]
       })
       if (value === null) {
@@ -29,12 +35,13 @@ export const mutations = {
       }
     } else {
       for (const [key, value] of Object.entries(param)) {
-        if (value !== undefined && value !== null) {
-          state[key] = JSON.parse(JSON.stringify(value))
+        if (!state[key]) {
+          state.key = value
         } else {
-          delete state[key]
+          state[key] = mergeDeep(state[key], value)
         }
       }
+      deepCleaner(state)
     }
   },
   reset (state) {

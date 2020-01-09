@@ -1,5 +1,5 @@
 import { mutations, state } from '@/store/filters'
-import { traverse } from '@/assets/api'
+import { traverse } from '@/assets/utils'
 
 describe('Filter Mutations', () => {
   beforeEach(() => {
@@ -51,6 +51,14 @@ describe('Filter Mutations', () => {
     // remove
     mutations.set(state, { key, value: null })
     expect(state.filters).not.toHaveProperty('bathrooms')
+  })
+
+  it('can reset the filter to standard values', () => {
+    mutations.reset(state)
+    expect(state.filters).toMatchSnapshot()
+    expect(state.viewport).toMatchSnapshot()
+    expect(state.location).toMatchSnapshot()
+    expect(state.locale).toMatchSnapshot()
   })
 
   it('remove a filter with an object-scheme', () => {
