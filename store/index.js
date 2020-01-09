@@ -69,27 +69,10 @@ export const mutations = {
   setPage (state, page) {
     const startIndex = state.perPage * (page - 1)
     const offset = (state.index || 0) % 10
-    const max = state.data.length - 1
     const endIndex = startIndex + offset
+    const max = state.data.length - 1
     state.index = endIndex > max ? max : endIndex
-  },
-  next (state) {
-    const index = state.index + state.perPage
-    const max = state.data.length - 1
-    state.index = index > max ? max : index
-  },
-  prev (state) {
-    const index = state.index - state.perPage
-    state.index = index < 0 ? 0 : index
-  },
-  begin (state) {
-    state.index = state.data.length > 0 ? 0 : undefined
-  },
-  end (state) {
-    const max = state.data.length - 1
-    state.index = max
   }
-
 }
 
 export const actions = {
