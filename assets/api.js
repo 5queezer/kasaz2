@@ -12,7 +12,7 @@ function getApartments (params) {
   if (typeof params === 'undefined') {
     params = {}
   }
-  if (process.env.NODE_ENV === 'development -') {
+  if (process.env.NODE_ENV === 'development') {
     url = `/response.json?random=${Math.random().toString(36).substring(7)}`
   } else {
     url = 'https://www.kasaz.com/api/v1/search/update_map_results'
@@ -26,7 +26,7 @@ function getApartments (params) {
   return api.get(url, { params: filters })
     .then((response) => {
       let data = response.data.markers
-      if (process.env.NODE_ENV === 'development -') {
+      if (process.env.NODE_ENV === 'development') {
         if (params.filters.price.min) { data = data.filter(item => item.p >= params.filters.price.min) }
         if (params.filters.price.max) { data = data.filter(item => item.p <= params.filters.price.max) }
         if (params.filters.surface.min) { data = data.filter(item => item.s >= params.filters.surface.min) }
