@@ -13,7 +13,7 @@
         />
       </b-form-group>
 
-      <b-badge v-if="item.condition" :variant="condition(item.condition)" class="sticky-top float-right mr-2 mt-2">
+      <b-badge v-if="item.condition" :variant="condition(item.condition)" class="float-right mr-2 mt-2">
         {{ item.condition | condition }}
       </b-badge>
 

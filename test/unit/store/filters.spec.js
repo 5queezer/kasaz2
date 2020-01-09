@@ -56,7 +56,8 @@ describe('Filter Mutations', () => {
   it('remove a filter with an object-scheme', () => {
     const filters = {
       price: {
-        max: 1e6
+        max: 1e6,
+        min: 20e3
       },
       bedrooms: 1
     }
@@ -71,6 +72,7 @@ describe('Filter Mutations', () => {
 
     expect(state.filters.price).not.toHaveProperty('max')
     expect(state.filters).not.toHaveProperty('bedrooms')
+    expect(state.filters.price).toHaveProperty('min', 20e3)
   })
 
   it('flatten an object structure', () => {

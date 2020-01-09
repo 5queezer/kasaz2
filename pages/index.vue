@@ -14,7 +14,7 @@
         <b-pagination v-model="page" :total-rows="data.length - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
-        <maps :center="currentLocation" :marker="data" @viewport_changed="setFilter($event)" />
+        <maps :center="currentLocation" :marker="data || []" @viewport_changed="setFilter($event)" />
       </b-col>
     </b-row>
   </b-container>

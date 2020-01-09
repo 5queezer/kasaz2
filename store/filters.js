@@ -41,6 +41,16 @@ export const mutations = {
     // filter scheme
     const init = {
       filters: {
+        lodgingType: {
+          attic: true,
+          duplex: true,
+          flat: true,
+          ground_floor: true,
+          house: true,
+          loft: true,
+          studio: true
+        },
+        showHiddenListings: false,
         sortby: 'relevance',
         price: {
           min: undefined,
