@@ -93,7 +93,9 @@ export default {
       }
     },
     centerMove ({ lat, lng } = this.current) {
-      this.$refs.gmap.panTo({ lat, lng })
+      this.$refs.gmap.$mapPromise.then(() => {
+        this.$refs.gmap.panTo({ lat, lng })
+      })
     }
   }
 }
