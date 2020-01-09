@@ -50,7 +50,7 @@ export default {
       const location = { lat: this.current.l, lng: this.current.g }
       return location
     },
-    ...mapGetters(['loading', 'data', 'paginated', 'current', 'paginated', 'perPage', 'currentPage']),
+    ...mapGetters(['loading', 'data', 'empty', 'paginated', 'current', 'paginated', 'perPage', 'currentPage']),
     ...mapGetters('filters', { getFilter: 'get' })
   },
   watch: {
