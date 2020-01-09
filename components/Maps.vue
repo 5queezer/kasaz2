@@ -1,6 +1,6 @@
 <template>
   <gmap-map
-    v-if="!apiKey"
+    v-if="apiKey"
     v-cloak
     id="gmap"
     ref="gmap"
