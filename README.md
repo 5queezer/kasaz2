@@ -8,6 +8,7 @@ img { float: left; }
 > Create a simple page to search for apartments. 
 
 - [kasaz coding challenge](https://github.com/kasaz/coding-challenge)
+- [codesandbox preview here](https://codesandbox.io/s/github/5queezer/kasaz2)
 
 
 ## Build Setup
