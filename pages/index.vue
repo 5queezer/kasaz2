@@ -5,13 +5,13 @@
         <navbar />
       </b-col>
     </b-row>
-    <b-row v-if="init || (count == 0 && loading)" class="loading">
+    <b-row v-if="init || (empty && loading)" class="loading">
       <b-spinner type="grow" label="Loading..." variant="primary" />
     </b-row>
     <b-row v-else class="mb-2 flex-fill overflow-hidden">
       <b-col cols="6" class="h-100 d-flex flex-column">
         <list id="listview" :data="paginated | list" class="flex-grow-1" />
-        <b-pagination v-model="currentPage" :total-rows="count - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
+        <b-pagination v-model="page" :total-rows="data.length - 1" :per-page="perPage" class="w-100 mt-2 d-flex justify-content-center" />
       </b-col>
       <b-col id="mapsview" cols="6">
         <maps :center="currentLocation" :marker="data" @viewport_changed="setFilter($event)" />
@@ -38,10 +38,7 @@ export default {
     }
   },
   computed: {
-    debug () {
-      return process.env.NODE_ENV === 'development'
-    },
-    currentPage: {
+    page: {
       get () {
         return this.currentPage
       },
@@ -53,7 +50,7 @@ export default {
       const location = { lat: this.current.l, lng: this.current.g }
       return location
     },
-    ...mapGetters(['loading', 'paginated', 'data', 'count', 'current', 'perPage', 'currentPage', 'current']),
+    ...mapGetters(['loading', 'data', 'paginated', 'current', 'paginated', 'perPage', 'currentPage']),
     ...mapGetters('filters', { getFilter: 'get' })
   },
   watch: {

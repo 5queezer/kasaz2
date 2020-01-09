@@ -8,7 +8,8 @@ import Navbar from '@/components/Navbar.vue'
 describe('Google Maps', () => {
   const options = {
     propsData: {
-      data: []
+      marker: [],
+      center: {}
     }
   }
 

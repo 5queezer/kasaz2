@@ -27,8 +27,8 @@ export const getters = {
     if (max === start) { return [start] }
     return getters.data.slice(start, end > max ? max + 1 : end)
   },
-  count (state) {
-    return state.data.length
+  empty (state) {
+    return state.data.length === 0
   },
   getIndex (state) {
     return state.index || 0
