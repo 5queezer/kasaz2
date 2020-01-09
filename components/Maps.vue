@@ -1,5 +1,6 @@
 <template>
   <gmap-map
+    v-if="!apiKey"
     v-cloak
     id="gmap"
     ref="gmap"
@@ -22,9 +23,14 @@
       />
     </gmap-cluster>
   </gmap-map>
+  <b-alert v-else variant="danger" :show="true">
+    Please set your Google Maps API Key in the <kbd>.env</kbd> file
+    <!-- {{ google }} -->
+  </b-alert>
 </template>
 
 <script>
+// import { gmapApi } from 'vue2-google-maps'
 
 export default {
   props: {
@@ -57,9 +63,13 @@ export default {
       },
       current: null,
       centerInit: {},
-      loading: true
+      // loading: true,
+      apiKey: process.env.GOOGLE_MAPS_API_KEY
     }
   },
+  // computed: {
+  //   google: gmapApi
+  // },
   watch: {
     center (newValue, oldValue) {
       if (typeof newValue.lng === 'number' && typeof newValue.lat === 'number' && !this.deepEqual(newValue, oldValue)) {
@@ -70,9 +80,9 @@ export default {
   },
   mounted () {
     this.centerInit = this.center
-    this.$refs.gmap.$mapPromise.then(() => {
-      this.loading = false
-    })
+    // this.$refs.gmap.$mapPromise.then(() => {
+    //   this.loading = false
+    // })
   },
   methods: {
     deepEqual (a, b) {
