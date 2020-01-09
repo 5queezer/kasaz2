@@ -44,7 +44,7 @@ export default {
       this.filters = { viewport, location, filters }
     },
     commit () {
-      this.set({ filters: this.filters })
+      this.set(this.filters)
     },
     ...mapMutations('filters', ['set'])
   }
