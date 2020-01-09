@@ -27,17 +27,24 @@ function getApartments (params) {
     .then((response) => {
       let data = response.data.markers
       if (process.env.NODE_ENV === 'development') {
-        if (params.filters.price.min) { data = data.filter(item => item.p >= params.filters.price.min) }
-        if (params.filters.price.max) { data = data.filter(item => item.p <= params.filters.price.max) }
-        if (params.filters.surface.min) { data = data.filter(item => item.s >= params.filters.surface.min) }
-        if (params.filters.surface.max) { data = data.filter(item => item.s <= params.filters.surface.max) }
+        if (params.filters.price) {
+          if (params.filters.price.min) { data = data.filter(item => item.p >= params.filters.price.min) }
+          if (params.filters.price.max) { data = data.filter(item => item.p <= params.filters.price.max) }
+        }
+        if (params.filters.surface) {
+          if (params.filters.surface.min) { data = data.filter(item => item.s >= params.filters.surface.min) }
+          if (params.filters.surface.max) { data = data.filter(item => item.s <= params.filters.surface.max) }
+        }
+
         if (params.filters.bedrooms) { data = data.filter(item => item.r === params.filters.bedrooms) }
         if (params.filters.bathrooms) { data = data.filter(item => item.b === params.filters.bathrooms) }
-        if (params.viewport.neLat && params.viewport.swLat && params.viewport.neLng && params.viewport.swLng) {
-          data = data.filter((item) => {
-            return item.l > params.viewport.swLat && item.l < params.viewport.neLat &&
+        if (params.viewport) {
+          if (params.viewport.neLat && params.viewport.swLat && params.viewport.neLng && params.viewport.swLng) {
+            data = data.filter((item) => {
+              return item.l > params.viewport.swLat && item.l < params.viewport.neLat &&
                    item.g > params.viewport.swLng && item.g < params.viewport.neLng
-          })
+            })
+          }
         }
       }
       return data
