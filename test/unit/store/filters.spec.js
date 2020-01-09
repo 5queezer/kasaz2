@@ -74,11 +74,11 @@ describe('Filter Mutations', () => {
     mutations.set(state, { filters })
 
     // remove
-    filters.price.max = undefined
-    filters.bedrooms = undefined
+    filters.price.max = null
+    filters.bedrooms = null
     mutations.set(state, { filters })
 
-    expect(state.filters.price).not.toHaveProperty('max')
+    expect(state.filters).not.toHaveProperty('max')
     expect(state.filters).not.toHaveProperty('bedrooms')
     expect(state.filters.price).toHaveProperty('min', 20e3)
   })

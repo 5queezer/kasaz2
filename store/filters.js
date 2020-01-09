@@ -40,8 +40,8 @@ export const mutations = {
         } else {
           state[key] = mergeDeep(state[key], value)
         }
+        deepCleaner(state[key])
       }
-      deepCleaner(state)
     }
   },
   reset (state) {
