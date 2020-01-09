@@ -6,7 +6,7 @@
           v-for="(i,j) in item.images"
           :key="j"
           v-model="index"
-          class="d-inline"
+          class="d-inline slide-pagination"
           name="slider-item"
           :value="j"
           :disabled="true"
@@ -131,9 +131,17 @@ export default {
     flex-direction: column;
   }
 
+  .slide-pagination {
+    visibility: hidden;
+  }
+
   &:hover {
     box-shadow: 0 0 5px grey;
     cursor: pointer;
+
+    .slide-pagination {
+      visibility: visible;
+    }
   }
 }
 .image {
